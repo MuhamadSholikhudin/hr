@@ -19,10 +19,15 @@ require "Function.php";
 class PageController extends Controller
 {
     //
-    public $url_api = "http://10.10.42.6:8880";
+    public $url_api = "http://localhost:8880";
+    public $url = "http://10.10.42.6:8080";
 
     public function index(){
-        return view('pages.index');
+
+        return view('pages.index',[
+            'base_url' => $this->url,
+            'url_p' => Url_website()
+        ]);
     }
     public function resign(){
 
@@ -32,6 +37,7 @@ class PageController extends Controller
 
         if(Curl($this->url_api) == "false"){
             return view('pages.resign',[
+                'base_url' => $this->url,       
                 'jobs' => $jobs,
                 'departments' => $departments,
                 'buildings' => $buildings

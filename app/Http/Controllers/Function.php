@@ -1,5 +1,6 @@
 <?php 
 
+
 function Curl($urlcurl){
 
     $ch = curl_init($urlcurl);
@@ -10,4 +11,14 @@ function Curl($urlcurl){
         $val = "true";
     }
     return $val;
+}
+
+function Url_website(){
+    $url = "http://127.0.0.1:8000";
+    return $url;
+}
+
+function Url_api(){
+    $url_api = "http://127.0.0.1:8880";
+    return $url_api;
 }

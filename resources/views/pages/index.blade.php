@@ -1,12 +1,15 @@
 @extends('layouts.main')
 
 @section('container')    
+<?php 
+            $base_url = "http://127.0.0.1:8000";
+?>
     
     <!-- Portfolio Section-->
     <section class="page-section portfolio" id="formonline">
         <div class="container">
             <!-- Portfolio Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">FORM ONLINE</h2>
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">FORM ONLINE <?= $url_p ?></h2>
             <!-- Icon Divider-->
             <div class="divider-custom">
                 <div class="divider-custom-line"></div>
@@ -22,7 +25,7 @@
                         <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                             <a class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></a>
                         </div>
-                        <img class="img-fluid" src="http://10.10.42.6:8080/templates/assets/img/portfolio/EXIT INTERVIEW.png" alt="..." />
+                        <img class="img-fluid" src="<?= $base_url ?>/templates/assets/img/portfolio/EXIT INTERVIEW.png" alt="..." />
                     </div>
                 </div>
                 <!-- Portfolio Item 2-->		
@@ -32,7 +35,7 @@
                         <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                             <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-circle fa-3x"></i></div>
                         </div>
-                        <img class="img-fluid" src="http://10.10.42.6:8080/templates/assets/img/portfolio/RESIGN ONLINE.png" alt="..." />
+                        <img class="img-fluid" src="<?= $base_url ?>/templates/assets/img/portfolio/RESIGN ONLINE.png" alt="..." />
                     </div>
                 </div>
                 
@@ -42,7 +45,7 @@
                         <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                             <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                         </div>
-                        <img class="img-fluid" src="http://10.10.42.6:8080/templates/assets/img/portfolio/CETAK DOWNLOAD.png" alt="..." />
+                        <img class="img-fluid" src="<?= $base_url ?>/templates/assets/img/portfolio/CETAK DOWNLOAD.png" alt="..." />
                     </div>
                 </div>
                 <!-- Portfolio Item 4-->
@@ -51,7 +54,7 @@
                         <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                             <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                         </div>
-                        <img class="img-fluid" src="http://10.10.42.6:8080/templates/assets/img/portfolio/KONSELING.png" alt="..." />
+                        <img class="img-fluid" src="<?= $base_url ?>/templates/assets/img/portfolio/KONSELING.png" alt="..." />
                     </div>
                 </div>
                 <!-- Portfolio Item 5-->
@@ -61,7 +64,7 @@
                         <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                             <a href="http://web.ad.hsinni.com/hwi/gnx/index.html" class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></a>
                         </div>
-                        <img class="img-fluid" src="http://10.10.42.6:8080/templates/assets/img/portfolio/Cuti Online.png" alt="..." />
+                        <img class="img-fluid" src="<?= $base_url ?>/templates/assets/img/portfolio/Cuti Online.png" alt="..." />
                     </div>
                 </div>
                 <!-- Portfolio Item 6-->
@@ -70,7 +73,7 @@
                         <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                             <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                         </div>
-                        <img class="img-fluid" src="http://10.10.42.6:8080/templates/assets/img/portfolio/We Are Hiring.png" alt="..." />
+                        <img class="img-fluid" src="<?= $base_url ?>/templates/assets/img/portfolio/We Are Hiring.png" alt="..." />
                     </div>
                 </div>
             </div>
@@ -94,16 +97,16 @@
         <!-- Portfolio Information-->
             <!-- Portfolio Information 1-->
             <div class="col-md-6 col-lg-3 mb-5 mb-md-5">
-                    <img class="img-fluid" src="http://10.10.42.6:8080/templates/assets/img/portfolio/SERVICE ORDER.png" >
+                    <img class="img-fluid" src="<?= $base_url?>/templates/assets/img/portfolio/SERVICE ORDER.png" >
                     </div>
             <div class="col-md-6 col-lg-3 mb-5 mb-md-5">
-                    <img class="img-fluid" src="http://10.10.42.6:8080/templates/assets/img/portfolio/SERVICE ORDER.png" >
+                    <img class="img-fluid" src="<?= $base_url?>/templates/assets/img/portfolio/SERVICE ORDER.png" >
                     </div>                        
             <div class="col-md-6 col-lg-3 mb-5 mb-md-5">
-                    <img class="img-fluid" src="http://10.10.42.6:8080/templates/assets/img/portfolio/SERVICE ORDER.png" >
+                    <img class="img-fluid" src="<?= $base_url?>/templates/assets/img/portfolio/SERVICE ORDER.png" >
                     </div>    
             <div class="col-md-6 col-lg-3 mb-5 mb-md-5">
-                <img class="img-fluid"  src="http://10.10.42.6:8080/templates/assets/img/portfolio/SERVICE ORDER.png" >
+                <img class="img-fluid"  src="<?= $base_url?>/templates/assets/img/portfolio/SERVICE ORDER.png" >
                     </div>                                     
             </div>
         </div>

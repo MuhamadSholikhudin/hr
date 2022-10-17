@@ -16,9 +16,12 @@
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
+        <?php 
+            $base_url = "http://127.0.0.1:8000";
+        ?>
         <style>
             #bg-depan {
-                background-image: url('http://10.10.42.6:8080/assets/img/View.jpg');
+                background-image: url('<?= $base_url ?>/assets/img/View.jpg');
                 /* background-color: #cccccc; */
                 height: 700px;    
                 background-attachment: fixed;
@@ -27,7 +30,7 @@
                 background-position: center;
             }
         </style>
-        <link href="http://10.10.42.6:8080/templates/css/styles.css" rel="stylesheet" />
+        <link href="<?= $base_url ?>/templates/css/styles.css" rel="stylesheet" />
 
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -41,7 +44,7 @@
         <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
             <div class="container">
                 <a href="http://127.0.0.1:8000">
-                    <img class="navbar-brand" height='60' widht='60' src ="http://10.10.42.6:8080/assets/img/putih.png" />
+                    <img class="navbar-brand" height='60' widht='60' src ="<?= $base_url ?>/assets/img/putih.png" />
                 </a>
 
                <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -211,7 +214,7 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Portfolio Modal - Image-->
-                                    <img class="img-fluid rounded mb-5" src="http://10.10.42.6:8080/templates/assets/img/portfolio/CETAK DOWNLOAD.png" alt="..." />
+                                    <img class="img-fluid rounded mb-5" src="<?= $base_url ?>/templates/assets/img/portfolio/CETAK DOWNLOAD.png" alt="..." />
                                     <!-- Portfolio Modal - Text-->
                                     <p class="mb-4">Menu ini sedang tahap pengerjaan, Terima kasih atas kunjungan anda.</p>
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
@@ -243,7 +246,7 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Portfolio Modal - Image-->
-                                    <img class="img-fluid rounded mb-5" src="http://10.10.42.6:8080/templates/assets/img/portfolio/KONSELING.png" alt="..." />
+                                    <img class="img-fluid rounded mb-5" src="<?= $base_url ?>/templates/assets/img/portfolio/KONSELING.png" alt="..." />
                                     <!-- Portfolio Modal - Text-->
                                     <p class="mb-4">Menu ini sedang tahap pengerjaan, Terima kasih atas kunjungan anda.</p>
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
@@ -275,7 +278,7 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Portfolio Modal - Image-->
-                                    <img class="img-fluid rounded mb-5" src="http://10.10.42.6:8080/templates/assets/img/portfolio/Cuti Online.png" alt="..." />
+                                    <img class="img-fluid rounded mb-5" src="<?= $base_url ?>/templates/assets/img/portfolio/Cuti Online.png" alt="..." />
                                     <!-- Portfolio Modal - Text-->
                                     <p class="mb-4">Menu ini sedang tahap pengerjaan, Terima kasih atas kunjungan anda.</p>
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
@@ -326,11 +329,11 @@
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
 
-        <script src="http://10.10.42.6:8080/plugins/jquery/jquery.slims.min.js"></script>
+        <script src="<?= $base_url ?>/plugins/jquery/jquery.slims.min.js"></script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-		<script src="http://10.10.42.6:8080/templates/js/bootstraps.bundle.min.js"></script>
+		<script src="<?= $base_url ?>/templates/js/bootstraps.bundle.min.js"></script>
 
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <!-- * *                               SB Forms JS                               * *-->

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        function generatePDF() {
+            const element = document.getElementById('container_content');
+            var canvasDataURL = element.toDataURL("image/png", 1.0);
+            var opt = {
+                margin: 1,
+                filename: 'html2pdf_example.pdf',
+                margin: 0,
+                image: {type: 'jpeg', quality: 0.95},
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            // Choose the element that our invoice is rendered in.
+            html2pdf().set(opt).set(canvasDataURL).from(element).save();
+        }
+    </script>
+
+    <style>
+        body {
+            margin: 0%;
+        }
+
+        .logotable,
+        .logotd,
+        .logoth {
+            border: 1px solid;
+        }
+
+        .logotable {
+            /* width: 100%; */
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="text-center" style="padding:10px;"></div>
+    <button onclick="generatePDF()">Generate PDF using HTML2PDF</button>
+    </div>
+    <div class="container_content" id="container_content">
+
+        <div style=" width: 770px; " id="formulir2lembar">
+            <table class="logotable">
+                <tr class="logotr">
+                    <th class="logoth">
+                        <img src="HWASEUNG.png" alt="" style="width: 100px; padding: 5px;">
+                    </th>
+                    <th class="logoth" style="width: 300px;">
+                        FORMULIR PENGAMBILAN <br>
+                        SURAT KETERANGAN KERJA
+                    </th>
+                    <th class="logoth">
+                        <table style="text-align: left;">
+                            <tr>
+                                <td>Nomor Dokument</td>
+                            </tr>
+                            <tr>
+                                <td>Tanggal Pengesahan</td>
+                            </tr>
+                            <tr>
+                                <td>Efektif Berlaku</td>
+                            </tr>
+                            <tr>
+                                <td>Masa Berlaku</td>
+                            </tr>
+                            <tr>
+                                <td>revisi</td>
+                            </tr>
+                            <tr>
+                                <td>Halaman</td>
+                            </tr>
+                        </table>
+                    </th>
+                    <th class="logoth">
+                        <table style="text-align: left;">
+                            <tr>
+                                <td>HRD-ABS/HWI/FORM-017</td>
+                            </tr>
+                            <tr>
+                                <td>03 Mei 2018</td>
+                            </tr>
+                            <tr>
+                                <td>03 Mei 2018</td>
+                            </tr>
+                            <tr>
+                                <td>1 (satu) Tahun</td>
+                            </tr>
+                            <tr>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>1/1</td>
+                            </tr>
+                        </table>
+                    </th>
+                </tr>
+            </table>
+
+            <div style="text-align: right;">Jepara,
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+            <table style="text-align: left;">
+                <tr>
+                    <td>Yang Bertanda tangan dibawah ini :</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>NIK ID Card</td>
+                    <td>:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Nama</td>
+                    <td>:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Gedung</td>
+                    <td>:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Jabatan</td>
+                    <td>:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Tanggal Masuk</td>
+                    <td>:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Tanggal Permohonan Keluar</td>
+                    <td>:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Tanggal Surat</td>
+                    <td>:</td>
+                    <td></td>
+                </tr>
+            </table>
+
+            <p style="text-align: left;">telah menyampaikan surat pengunduran diri kepada bagian Human Resource
+                Development. </p>
+
+            <h6 style="margin: 0%; font-weight: normal;"><i>Catatan :</i></h6>
+            <h6 style="margin: 0%;">
+                <li><i>Diberikan kepada karyawan</i></li>
+            </h6>
+            <h6 style="margin: 0%;">
+                <li><i>Mohon untuk dibawa ketika pengambilan Surat Keterangan Kerja dan diserahkan ke bagian HRD melalui
+                        Receptionist.</i></li>
+            </h6>
+            <h6 style="margin: 0%;">
+                ...................................................................................................................................
+                potong disini
+                ...................................................................................................................................
+            </h6>
+            <br>
+            <table class="logotable">
+                <tr class="logotr">
+                    <th class="logoth">
+                        <img src="HWASEUNG.png" alt="" style="width: 100px; padding: 5px;">
+                    </th>
+                    <th class="logoth" style="width: 300px;">
+                        FORMULIR PENGAMBILAN <br>
+                        SURAT KETERANGAN KERJA
+                    </th>
+                    <th class="logoth">
+                        <table style="text-align: left;">
+                            <tr>
+                                <td>Nomor Dokument</td>
+                            </tr>
+                            <tr>
+                                <td>Tanggal Pengesahan</td>
+                            </tr>
+                            <tr>
+                                <td>Efektif Berlaku</td>
+                            </tr>
+                            <tr>
+                                <td>Masa Berlaku</td>
+                            </tr>
+                            <tr>
+                                <td>revisi</td>
+                            </tr>
+                            <tr>
+                                <td>Halaman</td>
+                            </tr>
+                        </table>
+                    </th>
+                    <th class="logoth">
+                        <table style="text-align: left;">
+                            <tr>
+                                <td>HRD-ABS/HWI/FORM-017</td>
+                            </tr>
+                            <tr>
+                                <td>03 Mei 2018</td>
+                            </tr>
+                            <tr>
+                                <td>03 Mei 2018</td>
+                            </tr>
+                            <tr>
+                                <td>1 (satu) Tahun</td>
+                            </tr>
+                            <tr>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>1/1</td>
+                            </tr>
+                        </table>
+                    </th>
+                </tr>
+            </table>
+
+            <table style="text-align: left;">
+                <tr>
+                    <td>Yang Bertanda tangan dibawah ini :</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>NIK ID Card</td>
+                    <td>:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Nama</td>
+                    <td>:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Gedung</td>
+                    <td>:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Jabatan</td>
+                    <td>:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Tanggal Masuk</td>
+                    <td>:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Tanggal Permohonan Keluar</td>
+                    <td>:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Tanggal Surat</td>
+                    <td>:</td>
+                    <td></td>
+                </tr>
+            </table>
+            <p style="text-align: left;">telah menyampaikan surat pengunduran diri kepada bagian Human Resource
+                Development. </p>
+
+            <table>
+                <tr>
+                    <th style="width: 100px;">
+
+                    </th>
+                    <th style="width: 300px;">
+
+                    </th>
+                    <th style="width: 150px;">
+
+                    </th>
+                    <th>
+                        <table>
+                            <tr style="text-align: left; font-weight: normal;">
+                                <td>Jepara,</td>
+                            </tr>
+                            <tr style="font-weight: normal;">
+                                <td>Yang Bersangkutan,</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>(...........................................)</td>
+                            </tr>
+                        </table>
+                    </th>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>
+</body>
+
+</html>

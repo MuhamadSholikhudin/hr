@@ -17,7 +17,7 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <?php 
-            $base_url = "http://127.0.0.1:8000";
+            $base_url = "http://10.10.42.6:8080";
         ?>
         <style>
             #bg-depan {
@@ -43,7 +43,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
             <div class="container">
-                <a href="http://127.0.0.1:8000">
+                <a href="<?= $base_url ?>">
                     <img class="navbar-brand" height='60' widht='60' src ="<?= $base_url ?>/assets/img/putih.png" />
                 </a>
 

@@ -1,9 +1,7 @@
 @extends('layouts.main')
 
 @section('container')    
-<?php 
-            $base_url = "http://127.0.0.1:8000";
-?>
+
     
     <!-- Portfolio Section-->
     <section class="page-section portfolio" id="formonline">

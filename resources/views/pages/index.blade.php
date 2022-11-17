@@ -7,7 +7,7 @@
     <section class="page-section portfolio" id="formonline">
         <div class="container">
             <!-- Portfolio Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">FORM ONLINE <?= $url_p ?></h2>
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">FORM ONLINE</h2>
             <!-- Icon Divider-->
             <div class="divider-custom">
                 <div class="divider-custom-line"></div>
@@ -95,16 +95,16 @@
         <!-- Portfolio Information-->
             <!-- Portfolio Information 1-->
             <div class="col-md-6 col-lg-3 mb-5 mb-md-5">
-                    <img class="img-fluid" src="<?= $base_url?>/templates/assets/img/portfolio/SERVICE ORDER.png" >
+                    <img class="img-fluid" src="<?= $base_url ?>/templates/assets/img/portfolio/SERVICE ORDER.png" >
                     </div>
             <div class="col-md-6 col-lg-3 mb-5 mb-md-5">
-                    <img class="img-fluid" src="<?= $base_url?>/templates/assets/img/portfolio/SERVICE ORDER.png" >
+                    <img class="img-fluid" src="<?= $base_url ?>/templates/assets/img/portfolio/SERVICE ORDER.png" >
                     </div>                        
             <div class="col-md-6 col-lg-3 mb-5 mb-md-5">
-                    <img class="img-fluid" src="<?= $base_url?>/templates/assets/img/portfolio/SERVICE ORDER.png" >
+                    <img class="img-fluid" src="<?= $base_url ?>/templates/assets/img/portfolio/SERVICE ORDER.png" >
                     </div>    
             <div class="col-md-6 col-lg-3 mb-5 mb-md-5">
-                <img class="img-fluid"  src="<?= $base_url?>/templates/assets/img/portfolio/SERVICE ORDER.png" >
+                <img class="img-fluid"  src="<?= $base_url ?>/templates/assets/img/portfolio/SERVICE ORDER.png" >
                     </div>                                     
             </div>
         </div>

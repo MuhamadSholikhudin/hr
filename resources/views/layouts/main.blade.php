@@ -17,7 +17,7 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <?php 
-            $base_url = "http://10.10.42.6:8080";
+            $base_url = URL_WEB;
         ?>
         <style>
             #bg-depan {
@@ -46,7 +46,6 @@
                 <a href="<?= $base_url ?>">
                     <img class="navbar-brand" height='60' widht='60' src ="<?= $base_url ?>/assets/img/putih.png" />
                 </a>
-
                <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars"></i>
@@ -74,7 +73,7 @@
                     <div class="divider-custom-line"></div>
                 </div>
                 <!-- Masthead Subheading-->
-                <p class="masthead-subheading font-weight-light mb-0">Selamat Datang di Info HRD PT. Hwaseung Indonesia</p>
+                <p class="masthead-subheading font-weight-light mb-0">Selamat Datang di Info HRD PT. Hwaseung Indonesia </p>
             </div>
         </header>
 

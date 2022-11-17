@@ -1,8 +1,46 @@
 @extends('layouts.main')
 
 @section('container')   
+
+    @if (session()->has('faileddownload'))
+        <?= session('faileddownload') ?>
+    @elseif(session()->has('success'))
+        <?= session('success') ?>    
+    @elseif(session()->has('danger'))
+        {{ session('danger') }}
+    @else
+
+    @endif
+
     <!-- Portfolio Section-->
-    <section class="page-section portfolio" id="portfolio">
+    <section class="page-section portfolio" id="information">
+        <div class="container">
+            <!-- Portfolio Grid Items-->
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <h3 class="mt-4 text-center">Download Form Pengunduran Diri </h3>                   
+                    <div class="card p-1">
+                        <form action="/pages/resignpdf" method="POST">
+                        @csrf
+                        <div class="mb-3 text-start text-center mt-2" style="padding-left:10px; padding-right:10px;">
+                            <label for="nik" class="form-label">NIK (Nomor Induk Karyawan) / NO KTP</label>
+                            <input type="text" class="form-control" name="number_of_employees" id="number_of_employees" value="2203051857" placeholder="22050xxxxx" required>
+                        </div>
+                        <div class="mb-3 text-center" style="padding-left:10px; padding-right:10px;">
+                            <button class="btn btn-success" ><i class="fas fa-download"></i> Download Form Pengunduran diri</button> 
+                        </div>
+                        <a href="#formonline">
+                            <p style="text-align:center;">Jika belum mengajukan Silahkan isi form di bawah ini.</p>
+                        </a>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section-->
+    <section class="page-section portfolio" id="formonline">
         <div class="container">
             <!-- Portfolio Section Heading-->
             <h5 class="page-section-heading text-center text-uppercase text-secondary mb-0">FORM RESIGN ONLINE</h5>
@@ -32,7 +70,7 @@
                 </div>
                 <div class="col-md-6">
 
-                    <h3 class="mt-4">FORM PENGUNDURAN DIRI  <button class="btn btn-primary" id="checkemployee" onClick="ResignCheck();" ><i class="fas fa-rotation"></i> Cek</button> 
+                    <h3 class="mt-4">FORM PENGUNDURAN DIRI  <button class="btn btn-primary" id="checkemployee" onClick="ResignCheck();" ><i class="fas fa-spinner"></i> Cek</button> 
                     
                     <div class="spinner-border" id="spinner" role="status" style="display:none;">
                         <span class="sr-only">Loading...</span>
@@ -58,39 +96,32 @@
                         <div class="mb-3 text-start" id="checkdisplay" style="display:none;">
                             <label for="nik" class="form-label">Tanggal Permohonan Resign</label>
                             <input type="text" name="status" style="display:none;" id="status_employee" value="" required />
-                            <input type="date" name="dateresign" class="form-control" id="dateresign" min="<?= date("Y-m-d") ?>" value="<?= date("Y-m-d") ?>" required />
+                            <input type="date" name="dateresign" class="form-control" id="dateresign" min="<?= date('Y-m-d') ?>" value="<?= date('Y-m-d') ?>" required />
                         </div> 
                         <div class="mb-3 text-start">
                             <label for="noktp">Jabatan Terakhir</label>
                             <select class="form-select" aria-label="Default select example" name="jabatan" required>
-                                <?php 
-                                    foreach($jobs as $job){ ?>
-                                        <option value="<?= $job['job_level'] ?>"><?= $job['job_level'] ?></option>
-                                    <?php
-                                    }
-                                ?>
+                                <?php foreach ($jobs as $job) { ?>
+                                        <option value="<?= $job[
+                                            'job_level'
+                                        ] ?>"><?= $job['job_level'] ?></option>
+                                    <?php } ?>
                             </select>
                         </div>
                         <div class="mb-3 text-start">
                             <label for="noktp">Department Terakhir</label>
                             <select class="form-select" aria-label="Default select example" name="department" required>
-                                <?php 
-                                    foreach($departments as $department){ ?>
+                                <?php foreach ($departments as $department) { ?>
                                         <option value="<?= $department['department'] ?>"><?= $department['department'] ?></option>
-                                    <?php
-                                    }
-                                ?>
+                                    <?php } ?>
                             </select>
                         </div>
                         <div class="mb-3 text-start">
                             <label for="noktp">Gedung</label>
                             <select class="form-select" aria-label="Default select example" name="gedung" required>
-                                <?php 
-                                foreach($buildings as $building){ ?>
+                                <?php foreach ($buildings as $building) { ?>
                                     <option value="<?= $building ?>"><?= $building ?></option>
-                                <?php
-                                }
-                                ?>
+                                <?php } ?>
                             </select>
                         </div>
                         <div class="mb-3 text-start">
@@ -113,29 +144,29 @@
                         </div>
                         <div class="mb-3 text-start">
                             <label for="nik" class="form-label">Saran untuk perusahaan</label>
-                            <textarea class="form-control" name="saran" id="saran" placeholder="Saran anda kepada perusahaan " required></textarea>
+                            <textarea class="form-control" name="saran" id="saran" placeholder="Saran anda kepada perusahaan" required></textarea>
+                        </div>
+                        <div class="mb-3 text-start">
+                            <label for="nik" class="form-label">Alamat</label>
+                            <textarea class="form-control" name="address" id="address" placeholder="Alamat Tinggal Karyawan" required></textarea>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <h3 class="mt-4">FORM EXIT KUESIONER</h3>
+                    <?php $kuesioners = [
+                        1 => 'Saya terampil menyelesaikan target pekerjaan',
+                        2 => 'Atasan menggunakan kata-kata/sikap yang wajar dalam bekerja',
+                        3 => 'Rekan kerja saya membantu kesulitan saya dalam menyelesaikan pekerjaan',
+                        4 => 'Jarak perusahaan dengan tempat tinggal tidak menjadi masalah bagi saya',
+                        5 => 'Jam kerja (termasuk shift malam) tidak masalah bagi saya',
+                        6 => 'Saya berkeinginan kembali ke perusahaan (PT HWI) suatu saat nanti',
+                        7 => 'Keluarga (termasuk menikah, mengurus keluarga) bukanlah alasan bagi saya untuk meninggalkan perusahaan ini',
+                    ]; ?>
 
-                    <?php 
-                        $kuesioners = [
-                           1 => "Saya terampil menyelesaikan target pekerjaan",
-                           2 => "Atasan menggunakan kata-kata/sikap yang wajar dalam bekerja",
-                           3 => "Rekan kerja saya membantu kesulitan saya dalam menyelesaikan pekerjaan",
-                           4 => "Jarak perusahaan dengan tempat tinggal tidak menjadi masalah bagi saya",
-                           5 => "Jam kerja (termasuk shift malam) tidak masalah bagi saya",
-                           6 => "Saya berkeinginan kembali ke perusahaan (PT HWI) suatu saat nanti",
-                           7 => "Keluarga (termasuk menikah, mengurus keluarga) bukanlah alasan bagi saya untuk meninggalkan perusahaan ini"
-                        ];
-                    ?>
-
-                    <?php 
+                    <?php
                     $no = 1;
-                    foreach($kuesioners as $key => $kuesioner){
-                    ?>
+                    foreach ($kuesioners as $key => $kuesioner) { ?>
                     <div class="card p-1 mb-3">
                         <table>
                             <tr>
@@ -182,8 +213,7 @@
                             </tr>
                         </table>
                     </div>
-                    <?php
-                    }
+                    <?php }
                     ?>
                 </div>
                 <button class="btn btn-primary mt-4" type="submit" >AJUKAN PROSES RESIGN</button>
@@ -196,36 +226,5 @@
             </div>
         </div>
     </section>
-    <!-- About Section-->
-    <section class="page-section text-white mb-0" id="about" style="background-color: rgb(50, 102, 199);">
-        <div class="container" style="background-color: rgb(50, 102, 199);">
-            <!-- About Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-white">About</h2>
-            <!-- Icon Divider-->
-            <div class="divider-custom divider-light">
-                <div class="divider-custom-line"></div>
-                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                <div class="divider-custom-line"></div>
-            </div>
-            <!-- About Section Content-->
-            <div class="row">
-                <div class="col-lg-4 ms-auto">
-                    <p class="lead">Freelancer is a free bootstrap theme created by Start Bootstrap. The download
-                        includes the complete source files including HTML, CSS, and JavaScript as well as optional SASS
-                        stylesheets for easy customization.</p>
-                </div>
-                <div class="col-lg-4 me-auto">
-                    <p class="lead">You can create your own custom avatar for the masthead, change the icon in the
-                        dividers, and add your email address to the contact form to make it fully functional!</p>
-                </div>
-            </div>
-            <!-- About Section Button-->
-            <!-- <div class="text-center mt-4">
-                    <a class="btn btn-xl btn-outline-light" href="https://startbootstrap.com/theme/freelancer/">
-                        <i class="fas fa-download me-2"></i>
-                        Free Download!
-                    </a>
-                </div> -->
-        </div>
-    </section>
+
 @endsection

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Formulir Pengunduran Diri <?= $resignation_submissions->number_of_employees ?></title>
     <style>
         
         body{
@@ -75,6 +75,81 @@
     </style>
 </head>
 
+<?php
+    function YmdHistoYmd($date, $format){
+        $output = date($format, strtotime($date));
+        return $output;
+    }
+
+    function Dateplus($date_plus, $plus, $format){
+        $date = new \DateTime($date_plus);
+        $plus_day = '+'.$plus.' day';
+        $date->modify($plus_day);
+        return $date->format($format);
+    }
+
+    function DateSign($date, $day_cek){
+        $date_sign = new \DateTime($date.' 00:00:00');
+        $date_year_sp = date_format($date_sign, "Y"); //for Display Year
+        $date_month_sp =  date_format($date_sign, "m"); //for Display Month
+        $date_day_sp = date_format($date_sign, "d"); //for Display Date
+    
+        $day_sp = gmdate("l", mktime(0,0,0, $date_month_sp, $date_day_sp, $date_year_sp));
+
+            //Bulan Indonesia
+        if($date_month_sp == '01'){
+            $month_indo_sp = 'Januari';
+        }elseif($date_month_sp == '02'){
+            $month_indo_sp = 'Februari';            
+        }elseif($date_month_sp == '03'){
+            $month_indo_sp = 'Maret';            
+        }elseif($date_month_sp == '04'){
+            $month_indo_sp = 'April';            
+        }elseif($date_month_sp == '05'){
+            $month_indo_sp = 'Mei';            
+        }elseif($date_month_sp == '06'){
+            $month_indo_sp = 'Juni';            
+        }elseif($date_month_sp == '07'){
+            $month_indo_sp = 'Juli';            
+        }elseif($date_month_sp == '08'){
+            $month_indo_sp = 'Agustus';            
+        }elseif($date_month_sp == '09'){
+            $month_indo_sp = 'September';            
+        }elseif($date_month_sp == '10'){
+            $month_indo_sp = 'Oktober';            
+        }elseif($date_month_sp == '11'){
+            $month_indo_sp = 'November';            
+        }elseif($date_month_sp == '12'){
+            $month_indo_sp = 'Desember';            
+        }
+
+        // Hari Indonesia
+        if($day_sp == 'Monday'){
+            $day_indo_sp = 'Senin';
+        }elseif($day_sp == 'Tuesday'){
+            $day_indo_sp = 'Selasa';            
+        }elseif($day_sp == 'Wednesday'){
+            $day_indo_sp = 'Rabu';            
+        }elseif($day_sp == 'Thursday'){
+            $day_indo_sp = 'Kamis';            
+        }elseif($day_sp == 'Friday'){
+            $day_indo_sp = 'Jumat';            
+        }elseif($day_sp == 'Saturday'){
+            $day_indo_sp = 'Sabtu';            
+        }elseif($day_sp == 'Sunday'){
+            $day_indo_sp = 'Minggu';            
+        }
+
+        if($day_cek == true){
+            $output = $day_indo_sp.", ". $date_day_sp. " ". $month_indo_sp ." ". $date_year_sp;
+        }else{
+            $output = $date_day_sp. " ". $month_indo_sp ." ". $date_year_sp;
+        }
+
+        return $output;
+    }
+?>
+
 <body>
     <div style=" width: 770px; height:1020px; margin:0%;" id="formulir1lembar">
         <table class="logotable" style="border: 1px solid black"">
@@ -124,37 +199,37 @@
             <tr>
                 <td>NIK</td>
                 <td>:</td>
-                <td></td>
+                <td><?= $resignation_submissions->number_of_employees ?></td>
             </tr>
             <tr>
                 <td>Nama</td>
                 <td>:</td>
-                <td></td>
+                <td><?= $resignation_submissions->name ?></td>
             </tr>
             <tr>
                 <td>Jabatan</td>
                 <td>:</td>
-                <td></td>
+                <td><?= $resignation_submissions->position ?></td>
             </tr>
             <tr>
                 <td>Department</td>
                 <td>:</td>
-                <td></td>
+                <td><?= $resignation_submissions->department ?></td>
             </tr>
             <tr>
                 <td>Tanggal Masuk</td>
                 <td>:</td>
-                <td></td>
+                <td><?= YmdHistoYmd($resignation_submissions->hire_date, 'd/m/Y') ?></td>
             </tr>
             <tr>
                 <td>Tanggal Permohonan Keluar &nbsp;&nbsp;&nbsp;</td>
                 <td>:</td>
-                <td></td>
+                <td><?= YmdHistoYmd($resignation_submissions->date_resignation_submissions, 'd/m/Y') ?></td>
             </tr>
             <tr>
                 <td>Tanggal Pengambilan Surat</td>
                 <td>:</td>
-                <td></td>
+                <td><?= Dateplus($resignation_submissions->created_at, 14, 'd/m/Y')  ?></td>
             </tr>
             </table>
         </div>
@@ -221,37 +296,37 @@
             <tr>
                 <td>NIK</td>
                 <td>:</td>
-                <td></td>
+                <td><?= $resignation_submissions->number_of_employees ?></td>
             </tr>
             <tr>
                 <td>Nama</td>
                 <td>:</td>
-                <td></td>
+                <td><?= $resignation_submissions->name ?></td>
             </tr>
             <tr>
                 <td>Jabatan</td>
                 <td>:</td>
-                <td></td>
+                <td><?= $resignation_submissions->position ?></td>
             </tr>
             <tr>
                 <td>Department</td>
                 <td>:</td>
-                <td></td>
+                <td><?= $resignation_submissions->department ?></td>
             </tr>
             <tr>
                 <td>Tanggal Masuk</td>
                 <td>:</td>
-                <td></td>
+                <td><?= YmdHistoYmd($resignation_submissions->hire_date, 'd/m/Y')?></td>
             </tr>
             <tr>
                 <td>Tanggal Permohonan Keluar &nbsp;&nbsp;&nbsp;</td>
                 <td>:</td>
-                <td></td>
+                <td><?= YmdHistoYmd($resignation_submissions->date_resignation_submissions, 'd/m/Y') ?></td>
             </tr>
             <tr>
                 <td>Tanggal Pengambilan Surat</td>
                 <td>:</td>
-                <td></td>
+                <td><?= Dateplus($resignation_submissions->created_at, 14, 'd/m/Y') ?></td>
             </tr>
             </table>
         </div>
@@ -259,7 +334,7 @@
 
         <table>
             <tr style="margin-top:0%;">
-                <th  style="width: 500px;">
+                <th  style="width: 370px;">
                     
                 </th>
                 <!-- <th  style="width: 300px;">
@@ -270,8 +345,8 @@
                 </th> -->
                 <th >
                     <table>
-                        <tr style="text-align: left; font-weight: normal;">
-                            <td>Jepara,.............</td>
+                        <tr style="text-align: center; font-weight: normal;">
+                            <td>Jepara,<?= DateSign(YmdHistoYmd($resignation_submissions->date_resignation_submissions, 'Y-m-d'), false) ?></td>
                         </tr>
                         <tr style="font-weight: normal;">
                             <td style="text-align:center;">Karyawan</td>
@@ -287,7 +362,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>(.........................................)</td>
+                            <td>( <?= $resignation_submissions->name ?> )</td>
                         </tr>
                     </table>
                 </th>
@@ -352,7 +427,7 @@
             <u>
                 <h3 style="text-align: center;">FORM PENGUNDURAN DIRI</h3>
             </u>    
-            <table>
+            <table style="margin-top:0px;">
                 <tr>
                     <td>Yang Bertanda tangnan dibawah ini :</td>
                     <td></td>
@@ -365,37 +440,67 @@
                     <tr>
                         <td valign="top">Nama</td>
                         <td valign="top">:</td>
-                        <td valign="top"></td>
+                        <td valign="top"><?= $resignation_submissions->name ?></td>
                     </tr>
                     <tr>
                         <td valign="top">NIK ID Card</td>
                         <td valign="top">:</td>
-                        <td valign="top"></td>
+                        <td valign="top"><?= $resignation_submissions->number_of_employees ?></td>
                     </tr>
                     <tr>
                         <td valign="top">Jabatan</td>
                         <td valign="top">:</td>
-                        <td valign="top"></td>
+                        <td valign="top"><?= $resignation_submissions->position ?></td>
                     </tr>
                     <tr>
                         <td valign="top">Departemen</td>
                         <td valign="top">:</td>
-                        <td valign="top"></td>
+                        <td valign="top"><?= $resignation_submissions->department ?></td>
                     </tr>
                     <tr>
                         <td valign="top">Tanggal Masuk</td>
                         <td valign="top">:</td>
-                        <td valign="top"></td>
+                        <td valign="top"><?= YmdHistoYmd($resignation_submissions->hire_date, 'd/m/Y')?></td>
                     </tr>
                     <tr>
                         <td valign="top">Tempat, Tanggal Lahir &nbsp;&nbsp;</td>
                         <td valign="top">:</td>
-                        <td valign="top"></td>
+                        <td valign="top">
+                            <?php 
+                                echo $alamat["place_of_birth"]. ", ";
+                                $date_of_birth = $alamat["date_of_birth"];
+                                if($date_of_birth == ''){
+                                    echo $date_of_birth;
+                                }else{
+                                    echo YmdHistoYmd($date_of_birth, 'd/m/Y');
+                                } 
+                            ?>
+                        </td>
                     </tr>
                     <tr>
                         <td valign="top">Alamat</td>
                         <td valign="top">:</td>
-                        <td valign="top"></td>
+                        <td valign="top" style="width: 500px;">
+                            <?php
+                                $jalan = $alamat["address_jalan"];
+                                $rt = $alamat["address_rt"];
+                                if($alamat["address_rt"] != "" OR $alamat["address_rt"] == NULL){
+                                    $rt = "Rt ".$alamat["address_rt"];
+                                }
+                                $rw =  $alamat["address_rw"];
+                                if($alamat["address_rw"] != "" OR $alamat["address_rw"] == NULL){
+                                    $rw = "Rw ".$alamat["address_rw"];
+                                }
+                                $village = $alamat["address_village"];
+                                $district = $alamat["address_district"];
+                                $city = $alamat["address_city"];
+                                $province = $alamat["address_province"];
+
+                                $output_alamat = $rt." ".$rw." ".$village." ".$district." ".$city." ".$province;
+
+                                echo $output_alamat."</br>";
+                            ?>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -407,39 +512,39 @@
                     <tr>
                         <td valign="top">Hari, Tanggal</td>
                         <td valign="top">:</td>
-                        <td valign="top"></td>
+                        <td valign="top"><?= DateSign(YmdHistoYmd($resignation_submissions->date_resignation_submissions, 'Y-m-d'), true) ?></td>
                     </tr>
                     <tr>
                         <td valign="top">Alasan (<img src="{{ public_path('assets/img/checklist.png') }}" style="width:10px;" alt="" srcset="">)</td>
                         <td valign="top">:</td>
                         <td>
-                            <table style="margin:0%;">
+                            <table style="margin:0%; padding:0%;">
                                 <tr style="margin:0%;">
-                                    <td style="margin:0%;"><input type="checkbox" name="" id="" style="border-radius:3px;" checked="checked"></td>
+                                    <td style="margin:0%;"><input style="margin:0%; padding:0%;" type="checkbox" name="" id="" <?php if($resignation_submissions->reason == "Beban Kerja")  { echo 'checked="checked"'; } ?> ></td>
                                     <td style="margin:0%;">Beban Kerja</td>
-                                    <td style="margin:0%;"><input type="checkbox" name="" id=""></td>
+                                    <td style="margin:0%;"><input style="margin:0%; padding:0%;" type="checkbox" name="" id="" <?php if($resignation_submissions->reason == "Kesehatan/hamil/promil")  { echo 'checked="checked"'; } ?> ></td>
                                     <td style="margin:0%;">Kesehatan/ hamil/ promil</td>
                                 </tr>
                                 <tr style="margin:0%;">
-                                    <td style="margin:0%;"><input type="checkbox" name="" id=""></td>
+                                    <td style="margin:0%;"><input style="margin:0%; padding:0%;" type="checkbox" name="" id="" <?php if($resignation_submissions->reason == "Pimpinan")  { echo 'checked="checked"'; } ?>></td>
                                     <td style="margin:0%;">Pimpinan</td>
-                                    <td style="margin:0%;"><input type="checkbox" name="" id=""></td>
+                                    <td style="margin:0%;"><input style="margin:0%; padding:0%;" type="checkbox" name="" id="" <?php if($resignation_submissions->reason == "Pendidikan")  { echo 'checked="checked"'; } ?>></td>
                                     <td style="margin:0%;">Pendidikan</td>
                                 </tr>
                                 <tr style="margin:0%;">
-                                    <td style="margin:0%;"><input type="checkbox" name="" id=""></td>
+                                    <td style="margin:0%;"><input style="margin:0%; padding:0%;" type="checkbox" name="" id="" <?php if($resignation_submissions->reason == "Rekan Kerja")  { echo 'checked="checked"'; } ?>></td>
                                     <td style="margin:0%;">Rekan Kerja</td>
-                                    <td style="margin:0%;"><input type="checkbox" name="" id=""></td>
+                                    <td style="margin:0%;"><input style="margin:0%; padding:0%;" type="checkbox" name="" id="" <?php if($resignation_submissions->reason == "Pekerjaan baru/wirausaha")  { echo 'checked="checked"'; } ?>></td>
                                     <td style="margin:0%;">Pekerjaan baru / Wiraswasta</td>
                                 </tr>
                                 <tr style="margin:0%;">
-                                    <td style="margin:0%;"><input type="checkbox" name="" id=""></td>
+                                    <td style="margin:0%;"><input style="margin:0%; padding:0%;" type="checkbox" name="" id="" <?php if($resignation_submissions->reason == "Gaji")  { echo 'checked="checked"'; } ?>></td>
                                     <td style="margin:0%;">Gaji</td>
-                                    <td style="margin:0%;"><input type="checkbox" name="" id=""></td>
-                                    <td style="margin:0%;">Keluarag/ menikah</td>
+                                    <td style="margin:0%;"><input style="margin:0%; padding:0%;" type="checkbox" name="" id="" <?php if($resignation_submissions->reason == "Keluarga/menikah")  { echo 'checked="checked"'; } ?>></td>
+                                    <td style="margin:0%;">Keluarga/ menikah</td>
                                 </tr>
                                 <tr style="margin:0%;">
-                                    <td style="margin:0%;"><input type="checkbox" name="" id=""></td>
+                                    <td style="margin:0%;"><input style="margin:0%; padding:0%;" type="checkbox" name="" id="" <?php if($resignation_submissions->reason == "Jarak")  { echo 'checked="checked"'; } ?>></td>
                                     <td style="margin:0%;">Jarak</td>
                                     <td style="margin:0%;"></td>
                                     <td style="margin:0%;"></td>
@@ -453,23 +558,23 @@
                             <span style="font-size:12px;"><i>(Detail alasan Resign)</i></span>
                         </td>
                         <td valign="top">:</td>
-                        <td valign="top"></td>
+                        <td valign="top" style="width: 510px;"><?= $resignation_submissions->detail_reason ?></td>
                     </tr>
                     <tr>
                         <td valign="top">
                             Saran Untuk Perusahaan
                         </td>
                         <td valign="top">:</td>
-                        <td valign="top"></td>
+                        <td valign="top" style="width: 510px;"><?= $resignation_submissions->suggestion ?></td>
                     </tr>
                 </table>
             </div>
 
-            <p style="text-align: left;">Pengunduran diri ini Saya ajukan dengan sebenarnya, terima kasih atas perhatiannya. </p>
+            <p style="text-align: left; margin-top:0%; margin-bottom:2px;">Pengunduran diri ini Saya ajukan dengan sebenarnya, terima kasih atas perhatiannya. </p>
 
-            <div>Jepara, </div>
+            <div>Jepara, <?= DateSign(YmdHistoYmd($resignation_submissions->date_resignation_submissions, 'Y-m-d'), false) ?></div>
             <div style="margin-bottom:60px; width:100; text-align:center;">Hormat Saya,</div>
-            <div style="margin-bottom:10px;">(................................)</div>
+            <div style="margin-bottom:10px;">( <?= $resignation_submissions->name ?> )</div>
 
             
             <table class="" style="border-collapse: collapse;">
@@ -503,8 +608,7 @@
                     <td class="signtoptd"></td>
                 </tr>
             </table>
-            <br>
-            <table style="border-collapse: collapse;" id="signhrd">
+            <table style="border-collapse: collapse; margin-top:6px;" id="signhrd">
                 <tr>
                     <td style="width: 290px;"></td>
                     <td class="signtopthbtm" colspan="2" style="text-align:center; font-size:12px; margin:0px; padding: 0px;">HRD</td>
@@ -581,25 +685,25 @@
                 <tr>
                     <td style="width: 120px;">&nbsp;&nbsp;NIK</td>
                     <td>:</td>
-                    <td style="width: 270px;"></td>
+                    <td style="width: 270px;"><?= $resignation_submissions->number_of_employees ?></td>
                     <td></td>
                     <td style="width: 120px;">Department</td>
                     <td>:</td>
-                    <td></td>
+                    <td><?= $resignation_submissions->department ?></td>
                 </tr>
                 <tr>
                     <td>&nbsp;&nbsp;Nama</td>
                     <td>:</td>
-                    <td></td>
+                    <td><?= $resignation_submissions->name ?></td>
                     <td></td>
                     <td>Tanggal Masuk</td>
                     <td>:</td>
-                    <td></td>
+                    <td><?= YmdHistoYmd($resignation_submissions->hire_date, "d/m/Y") ?></td>
                 </tr>
                 <tr>
                     <td>&nbsp;&nbsp;Jabatan</td>
                     <td>:</td>
-                    <td></td>
+                    <td><?= $resignation_submissions->position ?></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -714,7 +818,7 @@
                 </tr>
                 <tr>
                     <td style="width:300px; text-align:center; height:150px;">(.......................)</td>
-                    <td style="width:380px; text-align:center; height:150px;">(.......................)</td>
+                    <td style="width:380px; text-align:center; height:150px;">(<?= $resignation_submissions->name ?>)</td>
                 </tr>
             </table> 
         </div>
@@ -774,23 +878,21 @@
                 <tr>
                     <td style="width: 120px;">&nbsp;&nbsp;Department</td>
                     <td>:</td>
-                    <td style="width: 270px;"></td>
+                    <td style="width: 270px;"><?= $resignation_submissions->department ?></td>
                     <td></td>
                     <td style="width: 120px;">Tanggal Masuk</td>
                     <td>:</td>
-                    <td></td>
+                    <td><?= YmdHistoYmd($resignation_submissions->hire_date, "d/m/Y") ?></td>
                 </tr>
                 <tr>
                     <td>&nbsp;&nbsp;Jabatan</td>
                     <td>:</td>
-                    <td></td>
+                    <td><?= $resignation_submissions->position ?></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
                 </tr>
-
-
             </table>
             
             <br>
@@ -826,7 +928,7 @@
                 </tr>
 
                 <?php 
-                        $kuesioners = [
+                        $kuesioneres = [
                            1 => "Saya terampil menyelesaikan target pekerjaan",
                            2 => "Atasan menggunakan kata-kata/sikap yang wajar dalam bekerja",
                            3 => "Rekan kerja saya membantu kesulitan saya dalam menyelesaikan pekerjaan",
@@ -836,20 +938,52 @@
                            7 => "Keluarga (termasuk menikah, mengurus keluarga) bukanlah alasan bagi saya untuk meninggalkan perusahaan ini"
                         ];
                     ?>
-
                 <?php 
                 $nopage4 = 1;
-                foreach($kuesioners as $key => $kuesioner){
+                foreach($kuesioneres as $key => $kuesioner){
                 ?>
                 <tr>
                     <td style="padding:5px; text-align:center; border: 1px solid black;"><?= $nopage4++ ?></td>
-                    <td style="padding:5px; border: 1px solid black;"><?= $kuesioner ?></td>
+                    <td style="padding:5px; border: 1px solid black;"><?= $kuesioner?></td>
+                    <?php $k = "k". ($nopage4-1) ?>                        
+
                     <td style="border: 1px solid black;">
-                    <div style="height:60px; "></div>
-                </td>
-                    <td style="border: 1px solid black;"></td>
-                    <td style="border: 1px solid black;"></td>
-                    <td style="border: 1px solid black;"></td>
+                        <?php 
+                            if($kuesioners->$k == 1){ ?>
+                            <div style="padding:10; text-align:center;">
+                                <img src="{{ public_path('assets/img/checklist.png') }}" style="width:10px;" alt="" srcset="">
+                            </div>
+                        <?php }
+                        ?>
+                    </td>
+
+                    <td style="border: 1px solid black;">     
+                        <?php 
+                            if($kuesioners->$k == 2){ ?>
+                            <div style="padding:10; text-align:center;">
+                                <img src="{{ public_path('assets/img/checklist.png') }}" style="width:10px;" alt="" srcset="">
+                            </div>
+                        <?php }
+                        ?>                   
+                    </td>
+                    <td style="border: 1px solid black;">
+                        <?php 
+                            if($kuesioners->$k == 3){ ?>
+                            <div style="padding:10; text-align:center;">
+                                <img src="{{ public_path('assets/img/checklist.png') }}" style="width:10px;" alt="" srcset="">
+                            </div>
+                        <?php }
+                        ?> 
+                    </td>
+                    <td style="border: 1px solid black;">
+                        <?php 
+                            if($kuesioners->$k == 4){ ?>
+                            <div style="padding:10; text-align:center;">
+                                <img src="{{ public_path('assets/img/checklist.png') }}" style="width:10px;" alt="" srcset="">
+                            </div>
+                        <?php }
+                        ?>
+                    </td>
                 </tr>
                 <?php } ?>
             </table>

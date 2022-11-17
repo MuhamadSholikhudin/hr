@@ -19,14 +19,13 @@ require "Function.php";
 class PageController extends Controller
 {
     //
-    public $url_api = "http://10.10.42.6:8880";
-    public $url = "http://10.10.42.6:8080";
+    public $url_api = URL_API_RESIGN;
+    public $url = URL_WEB;
 
     public function index(){
-
+        $jobs = [["job_level" => "NONE" ]];
         return view('pages.index',[
             'base_url' => $this->url,
-            'url_p' => Url_website()
         ]);
     }
 
@@ -59,24 +58,18 @@ class PageController extends Controller
             'departments' => $departments,
             'buildings' => $buildings
         ]);
-
     }
 
-
     public function getemployee(Request $request){
-
         $data = [400];
-
         if(Curl($this->url_api) == "false"){
             return json_encode($data);
         }
 
         $json = json_decode(file_get_contents($this->url_api."/resign/".$request->number_of_employees."/".$request->national_id.""), true);
-
         if($json['status'] == "200"){
             $data = [200];
         }
-
         return json_encode($data);
     }
 
@@ -96,16 +89,22 @@ class PageController extends Controller
 
         //get data employee yes or no 
         $json = json_decode(file_get_contents($this->url_api."/resign/".$request->number_of_employees."/".$request->national_id.""), true);
- 
+
         // tampilkan data hire_date, date_out, status_employee
         $dateresign = json_decode(file_get_contents($this->url_api."/resigndate/".$request->number_of_employees."/".$request->national_id.""), true);
-        
+ 
         //jika data employee ada maka
         if($json['status'] == "200"){
-
             switch ($dateresign['status']){
                 case 405: 
                     $status = 405;
+                    $status_resign = $dateresign['employee']['status_employee'];
+                    $date_resign = $dateresign['employee']['date_out'];
+                    $name = $dateresign['employee']['name'];
+                    $informasi = $dateresign['information'];
+                    break;
+                case 404: 
+                    $status = 404;
                     $status_resign = $dateresign['employee']['status_employee'];
                     $date_resign = $dateresign['employee']['date_out'];
                     $name = $dateresign['employee']['name'];
@@ -133,14 +132,12 @@ class PageController extends Controller
                     $informasi = "";
             }
         }
-                
+             
         $data = [$status, $status_resign, $date_resign, $name, $informasi];
-
         return json_encode($data);
     }
 
     public function Post(Request $request){
-
         $status_resign = "";
         $date_resign = date('Y-m-d');
         $status = 400;
@@ -148,7 +145,7 @@ class PageController extends Controller
 
         $url = Curl($this->url_api."/resign/".$request->nik."/".$request->ktp."");
         if($url !== "true"){ //jika koneksi api json gagal 
-            return redirect('/pages')->with('resignfailed', '<script>swal("Pengajuan Resign Gagal");</script>');
+            return redirect('/pages')->with('resignfailed', '<script>swal("Pengajuan Resign Gagal Karena Server Error");</script>');
         }
 
         //get data employee yes or no 
@@ -173,9 +170,12 @@ class PageController extends Controller
             return redirect('/pages')->with('resignfailed', '<script>swal("Pengajuan Resign Gagal Karena Data Pengajuan anda sudah berada di HRD untuk lebih lanjutnya silahkan hubungi hrd atau datang langsung ke HRD !");</script>');
         }
 
- 
+        if($dateresign['status'] ==  404){
+            return redirect('/pages')->with('resignfailed', '<script>swal("Pengajuan Resign Gagal Karena Data Pengajuan anda sudah berada di HRD untuk lebih lanjutnya silahkan hubungi hrd atau datang langsung ke HRD !");</script>');
+        }
 
-        if($dateresign['employee']['status_employee'] == "active"){ // jika status employee masih active maka tanggal resign min hari ini
+        // jika status employee masih active maka tanggal resign min hari ini
+        if($dateresign['employee']['status_employee'] == "active" OR $dateresign['status'] ==  200){ 
         
             $status = 200;
             $name = $dateresign['employee']['name'];
@@ -183,19 +183,20 @@ class PageController extends Controller
             if($date_out == "0000-00-00"){
                 $date_out = NULL;
             }
+            $date_resignation_submissions = $request->dateresign;
 
             $type = "true";
             $date_of_birth = $dateresign['employee']['date_of_birth'];
 
             //================
             $hire_date1 = strtotime($dateresign['employee']['hire_date']); 
-            $date_resign2 = strtotime($date_out); 
+            $date_resign2 = strtotime($date_resignation_submissions); 
             $distance = $date_resign2 - $hire_date1;
             $day = $distance / 60 / 60 / 24;
             $periode_of_service = $day;
             //=================
             
-            //================
+            //=================
             function Hitung_umur($tanggal_lahir){
                 $birthDate = new \DateTime($tanggal_lahir);
                 $today = new \DateTime("today");
@@ -205,29 +206,25 @@ class PageController extends Controller
                 $y = $today->diff($birthDate)->y;
                 $m = $today->diff($birthDate)->m;
                 $d = $today->diff($birthDate)->d;
-
                 return $y;
             }
             $age = Hitung_umur($date_of_birth);
             //================
 
             $status_reignsubmisssion = "wait";
-
-            $classification = "Mengajukan permohonan Resign sebelum resign";
+            $classification = "Mengajukan permohonan resign sebelum karyawan resign";
         }
 
         else{ // jika status employee masih tidak active maka tanggal resign adalah tanggak dia sudah resign
-            
             $status = 202;
             $name = $dateresign['employee']['name'];
             $status_resign = $dateresign['employee']['status_employee'];
             $date_out = $dateresign['employee']['date_out'];
-    
             if($date_out == "0000-00-00"){
                 $date_out = NULL;
             }
-
-            $type = "true";
+            $date_resignation_submissions = date("Y-m-d");
+            $type = "false";
 
             //================
             $hire_date1 = strtotime($dateresign['employee']['hire_date']); 
@@ -237,7 +234,7 @@ class PageController extends Controller
             $periode_of_service = $day;
             //=================
             
-            //================
+            //=================
             function Hitung_umur($tanggal_lahir){
                 $birthDate = new \DateTime($tanggal_lahir);
                 $today = new \DateTime("today");
@@ -253,15 +250,11 @@ class PageController extends Controller
             
             $age = Hitung_umur($dateresign['employee']['date_of_birth']);
             //================
-
             $status_reignsubmisssion = "wait";
-
-            $classification = "Mengajukan permohonan Resign setelah karyawan resign";
+            $classification = "Mengajukan permohonan resign setelah karyawan resign";
         }
 
-
         if($status == 200 OR $status == 202){
-
             $dataresign = [
                 'number_of_employees' => $request->nik,
                 'name' => $name,
@@ -270,10 +263,11 @@ class PageController extends Controller
                 'building' => $request->gedung,
                 'hire_date' => $dateresign['employee']['hire_date'],
                 'date_out' => $date_out,
-                'date_resignation_submissions' => $request->dateresign,
+                'date_resignation_submissions' => $date_resignation_submissions,
                 'type' => $type,
                 'reason' => $request->alasanresign,
                 'detail_reason' => $request->alasantambahan,
+                'address' => $request->address,
                 'periode_of_service' => $periode_of_service,
                 'age' => $age,
                 'suggestion' => $request->saran,
@@ -305,42 +299,66 @@ class PageController extends Controller
             DB::table('kuesioners')->insert($datakuesioner);
         }
 
-        // return redirect('/pages/resignpdf')->with('resignpdf', '<script>swal("Pengajuan Resign Karyawan Berhasil");</script>');
-        return redirect('/pages/resignpdf')->with('resignpdf', '<script>swal("Pengajuan Resign Karyawan Berhasil");</script>');
-
+        return redirect('/pages/resign'.$request->nik)->with('success', '<script>swal("Pengajuan Resign Karyawan Berhasil");</script>');
     }
 
-    // public function Resignpdf($number_of_employees){
-        
-    //     $resignation_submissions = DB::table('resignation_submissions')
-    //         ->where('number_of_employees', '=', $number_of_employees)
-    //         ->first();
+    /*
+        public function Resignpdf($number_of_employees){
+            $resignation_submissions = DB::table('resignation_submissions')
+                ->where('number_of_employees', '=', $number_of_employees)
+                ->first();
+            $kuesioners = DB::table('kuesioners')
+                ->where('number_of_employees', '=', $number_of_employees)
+                ->first();
+            $data = [
+                'resignation_submission' => $resignation_submissions,
+                'kuesioner' =>  $kuesioners
+            ];
+            $pdf = PDF::loadView('pages.pdfresign');
+            return $pdf->download('Formulir_pengunduran_diri.pdf', $data);
+        }
+    */
 
-    //     $kuesioners = DB::table('kuesioners')
-    //         ->where('number_of_employees', '=', $number_of_employees)
-    //         ->first();
-
-    //     $data = [
-    //         'resignation_submission' => $resignation_submissions,
-    //         'kuesioner' =>  $kuesioners
-    //     ];
-
-    //     $pdf = PDF::loadView('pages.pdfresign');
-     
-    //     return $pdf->download('Formulir_pengunduran_diri.pdf', $data);
-
-    // }
     public function Resignpdf(Request $request){
 
-        $data = DB::table("resignation_submisssions")
+        $count_submission = DB::table("resignation_submissions")
             ->where("number_of_employees", $request->number_of_employees)
+            ->count();
+
+        if($count_submission == 0){
+            return redirect('/pages/resign')->with('faileddownload', '<script>swal("Download Pengajuan Resign Gagal Karena Anda Belum mengajukan resign pada form di bawah ini");</script>');
+        }
+           
+        $resignation_submissions = DB::table("resignation_submissions")
+            ->where("number_of_employees", $request->number_of_employees)
+            ->where("number_of_employees", $request->number_of_employees)
+            ->latest()
             ->first();
 
-        $pdf = PDF::loadView('pages.pdfresign');
-        return $pdf->download('Formulir_pengunduran_diri.pdf');
-        // sleep for 10 seconds
-        sleep(60);
-        // return redirect('/pages/')->with('resignpdf', '<script>swal("Pengajuan Resign Karyawan Berhasil");</script>');
+        if($resignation_submissions->status_resignsubmisssion !== "wait"){
+            return redirect('/pages/resign')->with('faileddownload', '<script>swal("Download Pengajuan Resign Gagal Karena Anda Belum mengajukan resign pada form di bawah ini");</script>');
+        }
+
+        $kuesioners = DB::table("kuesioners")
+            ->where("number_of_employees", $request->number_of_employees)
+            ->latest()
+            ->first();
+
+        //Alamat dan Tanggal Lahir
+        $url = Curl($this->url_api);
+        if($url !== "true"){ //jika koneksi api json gagal 
+            return redirect('/pages/resign')->with('faileddownload', '<script>swal("Pengajuan Resign Gagal Karena Server Error");</script>');
+        }
+
+        $alamat = json_decode(file_get_contents($this->url_api."/resignalamat/".$request->number_of_employees), true);
+
+        $pdf = PDF::loadView('pages.pdfresign', [ 
+            'resignation_submissions' => $resignation_submissions,
+            'kuesioners' => $kuesioners,
+            'alamat' => $alamat
+        ]);
+
+        return $pdf->download('Formulir_pengunduran_diri_'.$request->number_of_employees.'.pdf');
     }
 
     public function example(){
@@ -462,6 +480,8 @@ class PageController extends Controller
         // return Http::get('http://example.com/users/1')['name'];
 
 
+        /*  API POST JSON WITH CURL
+
         // API URL
         $url = 'http://10.10.42.6:8880/resign';
 
@@ -504,6 +524,51 @@ class PageController extends Controller
 
         //output response
         // echo '<pre>'.$data.'</pre>';
+
+        */
+        
+
+        /*
+        $alamat = json_decode(file_get_contents($this->url_api."/resignalamat/2203051857"), true);
+
+        // dd($alamat);
+        $date_of_birth = $alamat["date_of_birth"];
+
+        if($date_of_birth == ''){
+            echo "YYYY-MM-DD";
+        }else{
+            echo $date_of_birth;
+        }
+
+        $jalan = $alamat["address_jalan"];
+        $rt = $alamat["address_rt"];
+        if($alamat["address_rt"] != "" OR $alamat["address_rt"] == NULL){
+            $rt = "Rt ".$alamat["address_rt"];
+        }
+        $rw =  $alamat["address_rw"];
+        if($alamat["address_rw"] != "" OR $alamat["address_rw"] == NULL){
+            $rw = "Rw ".$alamat["address_rw"];
+        }
+        $village = $alamat["address_village"];
+        $district = $alamat["address_district"];
+        $city = $alamat["address_city"];
+        $province = $alamat["address_province"];
+
+        $output_alamat = $jalan." ".$rt." ".$rw." ".$village." ".$district." ".$city." ".$province;
+
+        echo $output_alamat."</br>";
+
+        echo strlen($output_alamat);
+        */
+
+        $data = json_decode(file_get_contents($this->url_api."/resignsubmissions"), true);
+
+        echo $data["code"];
+        dd($data);
+        echo "</br>";
+
+        echo $data["meta"]["page"]["currentPage"];
+
 
     }
 

@@ -14,11 +14,11 @@ function Curl($urlcurl){
 }
 
 function Url_website(){
-    $url = "http://10.10.42:8080";
+    $url = "http://10.10.42.6:8001";
     return $url;
 }
 
 function Url_api(){
-    $url_api = "http://10.10.42:8880";
+    $url_api = "http://10.10.42.6:8880";
     return $url_api;
 }

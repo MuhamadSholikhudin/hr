@@ -4,7 +4,7 @@
 // define("URL_WEB", $actual_link);
 // define("SUM_URL_WEB", $jumlah_karakter);
 
-define("URL_WEB", "http://10.10.42.6:8001");
+define("URL_WEB", "http://10.10.42.6:8000");
 // define("SUM_URL_WEB", 23);
 
 // define("URL_WEB", "10.10.40.190:8080");

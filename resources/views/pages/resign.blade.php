@@ -78,7 +78,7 @@
 
                 </h3>                   
                     <div class="card p-1">
-                        <form action="/pages/resign" method="POST">
+                        <form action="/pages/resign" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3 text-start">
                             <label for="nik" class="form-label">NIK (Nomor Induk Karyawan) </label>

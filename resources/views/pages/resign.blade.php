@@ -24,7 +24,7 @@
                         @csrf
                         <div class="mb-3 text-start text-center mt-2" style="padding-left:10px; padding-right:10px;">
                             <label for="nik" class="form-label">NIK (Nomor Induk Karyawan) / NO KTP</label>
-                            <input type="text" class="form-control" name="number_of_employees" id="number_of_employees" value="2203051857" placeholder="22050xxxxx" required>
+                            <input type="text" class="form-control" name="number_of_employees" id="number_of_employees" value="" placeholder="22050xxxxx" required>
                         </div>
                         <div class="mb-3 text-center" style="padding-left:10px; padding-right:10px;">
                             <button class="btn btn-success" ><i class="fas fa-download"></i> Download Form Pengunduran diri</button> 
@@ -69,24 +69,21 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-
                     <h3 class="mt-4">FORM PENGUNDURAN DIRI  <button class="btn btn-primary" id="checkemployee" onClick="ResignCheck();" ><i class="fas fa-spinner"></i> Cek</button> 
-                    
                     <div class="spinner-border" id="spinner" role="status" style="display:none;">
                         <span class="sr-only">Loading...</span>
                     </div>
-
                 </h3>                   
                     <div class="card p-1">
                         <form action="/pages/resign" method="POST">
                         @csrf
                         <div class="mb-3 text-start">
                             <label for="nik" class="form-label">NIK (Nomor Induk Karyawan) </label>
-                            <input type="number" class="form-control" name="nik" id="resignnik" value="2203051857" placeholder="22050xxxxx" required>
+                            <input type="number" class="form-control" name="nik" id="resignnik" value="" placeholder="22050xxxxx" required>
                         </div>
                         <div class="mb-3 text-start">
                             <label for="noktp">No KTP</label>
-                            <input type="number" class="form-control" name="ktp" id="resignktp" value="3319060201990005" maxlength="20" placeholder="333453xxxxxx" required>
+                            <input type="number" class="form-control" name="ktp" id="resignktp" value="" maxlength="20" placeholder="333453xxxxxx" required>
                         </div>
                         
                         <div class="mb-3 text-start" id="checkname" style="display:none;">

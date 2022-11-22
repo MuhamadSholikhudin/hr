@@ -12,6 +12,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PDFController;
 
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,8 +28,8 @@ use App\Http\Controllers\PDFController;
 
 //Default
 Route::get('/', function () {
-    $url_api = "http://10.10.42.6:8880";
-    $url = "http://10.10.42.6:8001";
+    $url_api_resign = URL_API_RESIGN;
+    $url = URL_WEB;
     return view('pages.index', [
         'base_url' => $url
     ]);

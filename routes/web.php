@@ -56,9 +56,10 @@ Route::controller(DashboardController::class)->group(function () {
 // Info HRD
 Route::controller(PageController::class)->group(function () {
     Route::get('/pages/example', 'example');
-    
-    Route::get('/pages', 'index');
+	
+    Route::get('/pages', 'index');    
     Route::get('/pages/resign', 'resign');
+
     Route::post('/pages/resign', 'Post');
     Route::post('/pages/resignpdf', 'Resignpdf');
     Route::post('/pages/apigetemployee', 'getemployee')->name('apigetemployee');

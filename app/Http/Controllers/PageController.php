@@ -75,7 +75,7 @@ class PageController extends Controller
 
     public function apigetresign(Request $request){
 
-        $status_resign = "";
+        $status_resign = "200";
         $date_resign = date('Y-m-d');
         $status = 400;
         $name = "";
@@ -90,11 +90,11 @@ class PageController extends Controller
         //get data employee yes or no 
         $json = json_decode(file_get_contents($this->url_api."/resign/".$request->number_of_employees."/".$request->national_id.""), true);
 
-        // tampilkan data hire_date, date_out, status_employee
-        $dateresign = json_decode(file_get_contents($this->url_api."/resigndate/".$request->number_of_employees."/".$request->national_id.""), true);
- 
         //jika data employee ada maka
         if($json['status'] == "200"){
+            // tampilkan data hire_date, date_out, status_employee
+            $dateresign = json_decode(file_get_contents($this->url_api."/resigndate/".$request->number_of_employees."/".$request->national_id.""), true);
+ 
             switch ($dateresign['status']){
                 case 405: 
                     $status = 405;
@@ -158,7 +158,7 @@ class PageController extends Controller
         //filter resign submission there or noting
         $count_submission = DB::table('resignation_submissions')
             ->where('number_of_employees', $request->nik)
-            ->count();
+        ->count();
         if($count_submission > 0){ // Jika data pengajuan resign sudah ada
             return redirect('/pages')->with('resignfailed', '<script>swal("Pengajuan Resign Gagal Karena Karyawan dengan nik ini sudah mengajukan resign!");</script>');
         }
@@ -320,20 +320,19 @@ class PageController extends Controller
     */
 
     public function Resignpdf(Request $request){
-
         $count_submission = DB::table("resignation_submissions")
             ->where("number_of_employees", $request->number_of_employees)
-            ->count();
+        ->count();
 
         if($count_submission == 0){
-            return redirect('/pages/resign')->with('faileddownload', '<script>swal("Download Pengajuan Resign Gagal Karena Anda Belum mengajukan resign pada form di bawah ini");</script>');
+            return redirect('/pages/resign')->with('faileddownload', '<script>swal("Download Pengajuan Resign Gagal Karena NIK '.$request->number_of_employees.'  Belum mengajukan resign pada form di bawah ini");</script>');
         }
            
         $resignation_submissions = DB::table("resignation_submissions")
             ->where("number_of_employees", $request->number_of_employees)
             ->where("number_of_employees", $request->number_of_employees)
             ->latest()
-            ->first();
+        ->first();
 
         if($resignation_submissions->status_resignsubmisssion !== "wait"){
             return redirect('/pages/resign')->with('faileddownload', '<script>swal("Download Pengajuan Resign Gagal Karena Anda Belum mengajukan resign pada form di bawah ini");</script>');
@@ -342,7 +341,7 @@ class PageController extends Controller
         $kuesioners = DB::table("kuesioners")
             ->where("number_of_employees", $request->number_of_employees)
             ->latest()
-            ->first();
+        ->first();
 
         //Alamat dan Tanggal Lahir
         $url = Curl($this->url_api);

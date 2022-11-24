@@ -103,7 +103,7 @@
                     <!-- Footer About Text-->
                     <div class="col-lg-4">
                         <h4 class="text-uppercase mb-4">PT.HWASEUNG INDONESIA</h4>
-                        <img height='100' widht='100' src ="assets/img/HR System.png" />
+                        <img height='100' widht='100' src ="<?= $base_url ?>/assets/img/putih.png" />
                     </div>
                 </div>
             </div>

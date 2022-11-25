@@ -162,6 +162,138 @@
                         PT HWA SEUNG INDONESIA
                     </b>
                 </td>
+
+                <td class="logotd alignleft"  style="font-size:13px; padding-left:7px; padding-right:7px; padding-top:3px; padding-bottom:3px;">Nomor Dokumen</td>
+                <td class="logotd alignleft" style=" font-size:13px; padding-left:7px; padding-right:12px; padding-top:3px; padding-bottom:3px;">FM.IMS.HRD.015-03 &nbsp;&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="logotd alignleft" style=" font-size:13px; padding-left:7px; padding-right:7px; padding-top:3px; padding-bottom:3px;">Tanggal Pengesahan &nbsp;&nbsp;</td>
+                <td class="logotd alignleft" style=" font-size:13px; padding-left:7px; padding-right:7px; padding-top:3px; padding-bottom:3px;">10 Oktober 2017</td>
+            </tr>
+            <tr>
+                <td class="logotd" rowspan="2" style="text-align: center; font-size:13px;">
+                Formulir <br>
+                    Departemen Human Resource Development
+                </td>
+                <td class="logotd alignleft" style=" font-size:13px; padding-left:7px; padding-right:7px; padding-top:3px; padding-bottom:3px;">Tanggal Efektif</td>
+                <td class="logotd alignleft" style=" font-size:13px; padding-left:7px; padding-right:7px; padding-top:3px; padding-bottom:3px;">10 Oktober 2017</td>
+            </tr>
+            <tr>
+            <td class="logotd alignleft" style="font-size:13px; padding-left:7px; padding-right:7px; padding-top:3px; padding-bottom:3px;">Revisi</td>
+                <td class="logotd alignleft" style="font-size:13px; padding-left:7px; padding-right:7px; padding-top:3px; padding-bottom:3px;">0</td>
+            </tr>
+            <tr>
+                 <td class="logotd" colspan="2" style="text-align: center; font-size:13px;">
+                    Sistim Manajemen 
+                    Ketenagakerjaan
+                </td>
+                 <td class="logotd alignleft" style="font-size:13px; padding-left:7px; padding-right:7px; padding-top:3px; padding-bottom:3px;">Halaman</td>
+                <td class="logotd alignleft" style="font-size:13px; padding-left:7px; padding-right:7px; padding-top:3px; padding-bottom:3px;">1/1</td>
+            </tr>
+        </table>
+
+        <u>
+            <h3 style="text-align:center;">FORM PENGAMBILAN SURAT KETERANGAN KERJA</h3>
+        </u>
+
+        <div style="padding-left:20px; padding-right:20px;">
+            <table style="text-align: left;">
+            <tr>
+                <td>NIK</td>
+                <td>:</td>
+                <td><?= $resignation_submissions->number_of_employees ?></td>
+            </tr>
+            <tr>
+                <td>Nama</td>
+                <td>:</td>
+                <td><?= $resignation_submissions->name ?></td>
+            </tr>
+            <tr>
+                <td>Jabatan</td>
+                <td>:</td>
+                <td><?= $resignation_submissions->position ?></td>
+            </tr>
+            <tr>
+                <td>Department</td>
+                <td>:</td>
+                <td><?= $resignation_submissions->department ?></td>
+            </tr>
+            <tr>
+                <td>Tanggal Masuk</td>
+                <td>:</td>
+                <td><?= YmdHistoYmd($resignation_submissions->hire_date, 'd/m/Y')?></td>
+            </tr>
+            <tr>
+                <td>Tanggal Permohonan Keluar &nbsp;&nbsp;&nbsp;</td>
+                <td>:</td>
+                <td><?= YmdHistoYmd($resignation_submissions->date_resignation_submissions, 'd/m/Y') ?></td>
+            </tr>
+            <tr>
+                <td>Tanggal Pengambilan Surat</td>
+                <td>:</td>
+                <td><?= Dateplus($resignation_submissions->created_at, 14, 'd/m/Y') ?></td>
+            </tr>
+            </table>
+        </div>
+        <p style="margin-left:20px; text-align: left;">Telah menyampaikan surat pengunduran diri ke HRD. </p>
+
+        <table style="margin-bottom:0%;">
+            <tr style="margin-top:0%;">
+                <th  style="width: 420px;">
+                    
+                </th>
+                <th >
+                    <table>
+                        <tr style="text-align: center; font-weight: normal;">
+                            <td>
+                                Jepara,<?= DateSign(YmdHistoYmd($resignation_submissions->date_resignation_submissions, 'Y-m-d'), false) ?>
+                                <br>
+                                Karyawan
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p></p>
+                            </td>
+                        </tr>
+                        <tr style="text-align: center; font-weight: normal;">
+                            <td>( <?= $resignation_submissions->name ?> )</td>
+                        </tr>
+                    </table>
+                </th>
+            </tr>
+            <tr style="margin:0%;">
+                <td>
+                    <div style="font-size: 14px; margin-top: 0%; margin-left:20px;  margin-top:20px;">Catatan :</div>
+                    <ul style="margin-top: 0%;">
+                        <li style="font-size:14px;"> <b><i>Form diserahkan ke HRD</i></b> </li>
+                    </ul>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+        
+        <h5 style="margin: 0%;">
+            ...........................................................................................
+            potong disini
+            ..................................................................................................
+        </h5>
+
+        <table class="logotable" style="border: 1px solid black"">
+            <tr>
+                <td class="logotd" rowspan="4" >
+                    <img src="{{ public_path('assets/img/HWASEUNG.png') }}" alt="" style="width: 120px; padding: 5px;">
+                </td>
+                <td class="logotd" rowspan="2" style="text-align: center; width: 300px; font-size:13px;">
+                    <b>
+                        PT HWA SEUNG INDONESIA
+                    </b>
+                </td>
                 <td class="logotd alignleft"  style="font-size:13px; padding-left:7px; padding-right:7px; padding-top:3px; padding-bottom:3px;">Nomor Dokumen</td>
                 <td class="logotd alignleft" style=" font-size:13px; padding-left:7px; padding-right:12px; padding-top:3px; padding-bottom:3px;">FM.IMS.HRD.015-03 &nbsp;&nbsp;</td>
             </tr>
@@ -235,148 +367,10 @@
         </div>
         <div style="font-size: 14px; margin-left:20px;  margin-top:20px;"> <i>Catatan :</i> </div>
 
-        <ul style="margin-top: 0%;">
+        <ul style="margin-top: 0%; margin-bottom: 0%;">
             <li style="font-size:14px;"> <b><i>Form diserahkan ke karayawan</i></b> </li>
             <li style="font-size:14px;"> <b><i> <u>WAJIB</u> dibawa ketika pengambilan surat keterangan kerja</i></b> </li>
         </ul>
-        
-        <h5 style="margin: 0%;">
-            ...........................................................................................
-            potong disini
-            ..................................................................................................
-        </h5>
-        <br>
-
-        <table class="logotable" style="border: 1px solid black"">
-            <tr>
-                <td class="logotd" rowspan="4" >
-                    <img src="{{ public_path('assets/img/HWASEUNG.png') }}" alt="" style="width: 120px; padding: 5px;">
-                </td>
-                <td class="logotd" rowspan="2" style="text-align: center; width: 300px; font-size:13px;">
-                    <b>
-                        PT HWA SEUNG INDONESIA
-                    </b>
-                </td>
-
-                <td class="logotd alignleft"  style="font-size:13px; padding-left:7px; padding-right:7px; padding-top:3px; padding-bottom:3px;">Nomor Dokumen</td>
-                <td class="logotd alignleft" style=" font-size:13px; padding-left:7px; padding-right:12px; padding-top:3px; padding-bottom:3px;">FM.IMS.HRD.015-03 &nbsp;&nbsp;</td>
-            </tr>
-            <tr>
-                <td class="logotd alignleft" style=" font-size:13px; padding-left:7px; padding-right:7px; padding-top:3px; padding-bottom:3px;">Tanggal Pengesahan &nbsp;&nbsp;</td>
-                <td class="logotd alignleft" style=" font-size:13px; padding-left:7px; padding-right:7px; padding-top:3px; padding-bottom:3px;">10 Oktober 2017</td>
-            </tr>
-            <tr>
-                <td class="logotd" rowspan="2" style="text-align: center; font-size:13px;">
-                Formulir <br>
-                    Departemen Human Resource Development
-                </td>
-                <td class="logotd alignleft" style=" font-size:13px; padding-left:7px; padding-right:7px; padding-top:3px; padding-bottom:3px;">Tanggal Efektif</td>
-                <td class="logotd alignleft" style=" font-size:13px; padding-left:7px; padding-right:7px; padding-top:3px; padding-bottom:3px;">10 Oktober 2017</td>
-            </tr>
-            <tr>
-            <td class="logotd alignleft" style="font-size:13px; padding-left:7px; padding-right:7px; padding-top:3px; padding-bottom:3px;">Revisi</td>
-                <td class="logotd alignleft" style="font-size:13px; padding-left:7px; padding-right:7px; padding-top:3px; padding-bottom:3px;">0</td>
-            </tr>
-            <tr>
-                 <td class="logotd" colspan="2" style="text-align: center; font-size:13px;">
-                    Sistim Manajemen 
-                    Ketenagakerjaan
-                </td>
-                 <td class="logotd alignleft" style="font-size:13px; padding-left:7px; padding-right:7px; padding-top:3px; padding-bottom:3px;">Halaman</td>
-                <td class="logotd alignleft" style="font-size:13px; padding-left:7px; padding-right:7px; padding-top:3px; padding-bottom:3px;">1/1</td>
-            </tr>
-        </table>
-
-        <u>
-            <h3 style="text-align:center;">FORM PENGAMBILAN SURAT KETERANGAN KERJA</h3>
-        </u>
-
-        <div style="padding-left:20px; padding-right:20px;">
-        <table style="text-align: left;">
-            <tr>
-                <td>NIK</td>
-                <td>:</td>
-                <td><?= $resignation_submissions->number_of_employees ?></td>
-            </tr>
-            <tr>
-                <td>Nama</td>
-                <td>:</td>
-                <td><?= $resignation_submissions->name ?></td>
-            </tr>
-            <tr>
-                <td>Jabatan</td>
-                <td>:</td>
-                <td><?= $resignation_submissions->position ?></td>
-            </tr>
-            <tr>
-                <td>Department</td>
-                <td>:</td>
-                <td><?= $resignation_submissions->department ?></td>
-            </tr>
-            <tr>
-                <td>Tanggal Masuk</td>
-                <td>:</td>
-                <td><?= YmdHistoYmd($resignation_submissions->hire_date, 'd/m/Y')?></td>
-            </tr>
-            <tr>
-                <td>Tanggal Permohonan Keluar &nbsp;&nbsp;&nbsp;</td>
-                <td>:</td>
-                <td><?= YmdHistoYmd($resignation_submissions->date_resignation_submissions, 'd/m/Y') ?></td>
-            </tr>
-            <tr>
-                <td>Tanggal Pengambilan Surat</td>
-                <td>:</td>
-                <td><?= Dateplus($resignation_submissions->created_at, 14, 'd/m/Y') ?></td>
-            </tr>
-            </table>
-        </div>
-        <div style="margin-left:20px; text-align: left;">Telah menyampaikan surat pengunduran diri ke HRD. </p>
-
-        <table>
-            <tr style="margin-top:0%;">
-                <th  style="width: 370px;">
-                    
-                </th>
-                <!-- <th  style="width: 300px;">
-                    
-                </th>
-                <th  style="width: 100px;">
-                   
-                </th> -->
-                <th >
-                    <table>
-                        <tr style="text-align: center; font-weight: normal;">
-                            <td>Jepara,<?= DateSign(YmdHistoYmd($resignation_submissions->date_resignation_submissions, 'Y-m-d'), false) ?></td>
-                        </tr>
-                        <tr style="font-weight: normal;">
-                            <td style="text-align:center;">Karyawan</td>
-                        </tr>
-                        <tr>
-                            <td>
-                            <br>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>( <?= $resignation_submissions->name ?> )</td>
-                        </tr>
-                    </table>
-                </th>
-            </tr>
-            <tr style="margin-top:0%;">
-                <td>
-                    <div style="font-size: 14px; margin-top: 0%; margin-left:20px;  margin-top:20px;">Catatan :</div>
-                    <ul style="margin-top: 0%;">
-                        <li style="font-size:14px;"> <b><i>Form diserahkan ke HRD</i></b> </li>
-                    </ul>
-                </td>
-                <td></td>
-            </tr>
-        </table>
        
 
     </div>
@@ -505,7 +499,7 @@
                 </table>
             </div>
 
-            <p style="margin:0%; text-align: left;">Bermaksud mengajukan pengunduran diri (Resign) dari PT. Hwa Seung Indonesia, terhitung mulai: </p>
+            <p style=" text-align: left;">Bermaksud mengajukan pengunduran diri (Resign) dari PT. Hwa Seung Indonesia, terhitung mulai: </p>
 
             <div style="padding-left:20px;">
                 <table>
@@ -524,31 +518,26 @@
                                     <td style="margin:0%;">Beban Kerja</td>
                                     <td style="margin:0%;"><input style="margin:0%; padding:0%;" type="checkbox" name="" id="" <?php if($resignation_submissions->reason == "Kesehatan/hamil/promil")  { echo 'checked="checked"'; } ?> ></td>
                                     <td style="margin:0%;">Kesehatan/ hamil/ promil</td>
+                                    <td style="margin:0%;"><input style="margin:0%; padding:0%;" type="checkbox" name="" id="" <?php if($resignation_submissions->reason == "Gaji")  { echo 'checked="checked"'; } ?>></td>
+                                    <td style="margin:0%;">Gaji</td>
                                 </tr>
                                 <tr style="margin:0%;">
                                     <td style="margin:0%;"><input style="margin:0%; padding:0%;" type="checkbox" name="" id="" <?php if($resignation_submissions->reason == "Pimpinan")  { echo 'checked="checked"'; } ?>></td>
                                     <td style="margin:0%;">Pimpinan</td>
+                                    <td style="margin:0%;"><input style="margin:0%; padding:0%;" type="checkbox" name="" id="" <?php if($resignation_submissions->reason == "Pekerjaan baru/wirausaha")  { echo 'checked="checked"'; } ?>></td>
+                                    <td style="margin:0%;">Pekerjaan baru / Wiraswasta</td>
                                     <td style="margin:0%;"><input style="margin:0%; padding:0%;" type="checkbox" name="" id="" <?php if($resignation_submissions->reason == "Pendidikan")  { echo 'checked="checked"'; } ?>></td>
                                     <td style="margin:0%;">Pendidikan</td>
                                 </tr>
                                 <tr style="margin:0%;">
                                     <td style="margin:0%;"><input style="margin:0%; padding:0%;" type="checkbox" name="" id="" <?php if($resignation_submissions->reason == "Rekan Kerja")  { echo 'checked="checked"'; } ?>></td>
                                     <td style="margin:0%;">Rekan Kerja</td>
-                                    <td style="margin:0%;"><input style="margin:0%; padding:0%;" type="checkbox" name="" id="" <?php if($resignation_submissions->reason == "Pekerjaan baru/wirausaha")  { echo 'checked="checked"'; } ?>></td>
-                                    <td style="margin:0%;">Pekerjaan baru / Wiraswasta</td>
-                                </tr>
-                                <tr style="margin:0%;">
-                                    <td style="margin:0%;"><input style="margin:0%; padding:0%;" type="checkbox" name="" id="" <?php if($resignation_submissions->reason == "Gaji")  { echo 'checked="checked"'; } ?>></td>
-                                    <td style="margin:0%;">Gaji</td>
                                     <td style="margin:0%;"><input style="margin:0%; padding:0%;" type="checkbox" name="" id="" <?php if($resignation_submissions->reason == "Keluarga/menikah")  { echo 'checked="checked"'; } ?>></td>
                                     <td style="margin:0%;">Keluarga/ menikah</td>
-                                </tr>
-                                <tr style="margin:0%;">
                                     <td style="margin:0%;"><input style="margin:0%; padding:0%;" type="checkbox" name="" id="" <?php if($resignation_submissions->reason == "Jarak")  { echo 'checked="checked"'; } ?>></td>
                                     <td style="margin:0%;">Jarak</td>
-                                    <td style="margin:0%;"></td>
-                                    <td style="margin:0%;"></td>
                                 </tr>
+
                             </table>
                         </td>
                     </tr>
@@ -570,7 +559,7 @@
                 </table>
             </div>
 
-            <p style="text-align: left; margin-top:0%; margin-bottom:2px;">Pengunduran diri ini Saya ajukan dengan sebenarnya, terima kasih atas perhatiannya. </p>
+            <p style="text-align: left; ">Pengunduran diri ini Saya ajukan dengan sebenarnya, terima kasih atas perhatiannya. </p>
 
             <div>Jepara, <?= DateSign(YmdHistoYmd($resignation_submissions->date_resignation_submissions, 'Y-m-d'), false) ?></div>
             <div style="margin-bottom:60px; width:100; text-align:center;">Hormat Saya,</div>
@@ -608,7 +597,8 @@
                     <td class="signtoptd"></td>
                 </tr>
             </table>
-            <table style="border-collapse: collapse; margin-top:6px;" id="signhrd">
+            <br>
+            <table style="border-collapse: collapse; margin-top:3px;" id="signhrd">
                 <tr>
                     <td style="width: 290px;"></td>
                     <td class="signtopthbtm" colspan="2" style="text-align:center; font-size:12px; margin:0px; padding: 0px;">HRD</td>
@@ -817,7 +807,7 @@
                     <td style="width:380px; text-align:center;">Yang menyerahkan</td>
                 </tr>
                 <tr>
-                    <td style="width:300px; text-align:center; height:150px;">(.......................)</td>
+                    <td style="width:300px; text-align:center; height:150px;">(......................................)</td>
                     <td style="width:380px; text-align:center; height:150px;">(<?= $resignation_submissions->name ?>)</td>
                 </tr>
             </table> 

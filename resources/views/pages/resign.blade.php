@@ -23,7 +23,7 @@
                         <form action="/pages/resignpdf" method="POST">
                         @csrf
                         <div class="mb-3 text-start text-center mt-2" style="padding-left:10px; padding-right:10px;">
-                            <label for="nik" class="form-label">NIK (Nomor Induk Karyawan) / NO KTP</label>
+                            <label for="nik" class="form-label">NIK (Nomor Induk Karyawan) / Nomor ID CARD</label>
                             <input type="text" class="form-control" name="number_of_employees" id="number_of_employees" value="" placeholder="22050xxxxx" required>
                         </div>
                         <div class="mb-3 text-center" style="padding-left:10px; padding-right:10px;">
@@ -69,55 +69,61 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <h3 class="mt-4">FORM PENGUNDURAN DIRI  <button class="btn btn-primary" id="checkemployee" onClick="ResignCheck();" ><i class="fas fa-spinner"></i> Cek</button> 
-                    <div class="spinner-border" id="spinner" role="status" style="display:none;">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                </h3>                   
+                    <h3 class="mt-4">FORM PENGUNDURAN DIRI  
+                    </h3>                   
                     <div class="card p-1">
-                        <form action="/pages/resign" method="POST" enctype="multipart/form-data">
-                        @csrf
+
                         <div class="mb-3 text-start">
-                            <label for="nik" class="form-label">NIK (Nomor Induk Karyawan) </label>
-                            <input type="number" class="form-control" name="nik" id="resignnik" value="" placeholder="22050xxxxx" required>
+                            <label for="nik" class="form-label">NIK (Nomor Induk Karyawan / Nomor ID CARD) </label>
+                            <input type="number" class="form-control" id="resignnik" value="" onkeyup="Checkkeynik();" onkeydown="Checkkeynik();" placeholder="22050xxxxx : WAJIB DI ISI" required>
                         </div>
                         <div class="mb-3 text-start">
                             <label for="noktp">No KTP</label>
-                            <input type="number" class="form-control" name="ktp" id="resignktp" value="" maxlength="20" placeholder="333453xxxxxx" required>
+                            <input type="number" class="form-control" id="resignktp" value="" onkeyup="Checkkeyktp();" onkeydown="Checkkeyktp();" maxlength="20" placeholder="333453xxxxxx : WAJIB DI ISI" required>
+                        </div>                        
+                        <div class="mb-3 text-start" >
+                            <span>Isi NIK dan Nomer KTP lalu tekan tombol cek untuk check data karyawan !!!</span>
+                            <br>
+                            <button class="btn btn-primary" id="checkemployee" onClick="ResignCheck();" ><i class="fas fa-spinner"></i> Cek</button> 
+                            <div class="spinner-border" id="spinner" role="status" style="display:none;">
+                                <span class="sr-only">Loading...</span>
+                            </div>
                         </div>
-                        
-                        <div class="mb-3 text-start" id="checkname" style="display:none;">
+                        <form action="/pages/resign" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="number" name="nik" class="form-control d-none" id="valuenik" value="" required>
+                        <input type="number" name="ktp" class="form-control d-none" id="valuektp" value="" required>
+                 
+                        <div class="mb-3 text-start " id="checkname" style="display:none;">
                             <label for="name" class="form-label">NAMA </label>
                             <input type="text" class="form-control" name="name" id="name" value="" required readonly>
+                        </div>
+                        <div class="mb-3 text-start" id="job_levelxl" style="display:none;">
+                            <label for="noktp">Jabatan Terakhir</label>
+                            <input type="text" class="form-control" id="job_levelx"  readonly />
+                            <input type="hidden" class="form-control" name="jabatan" id="job_level" value="" required />
+                        </div>
+                        <div class="mb-3 text-start" id="departmentxl" style="display:none;">
+                            <label for="noktp">Department Terakhir</label>
+                            <input type="text" class="form-control" id="departmentx"  readonly />
+                            <input type="hidden" class="form-control" name="department" id="department" value="" required />
                         </div>
                         <div class="mb-3 text-start" id="checkdisplay" style="display:none;">
                             <label for="nik" class="form-label">Tanggal Permohonan Resign</label>
                             <input type="text" name="status" style="display:none;" id="status_employee" value="" required />
                             <input type="date" name="dateresign" class="form-control" id="dateresign" min="<?= date('Y-m-d') ?>" value="<?= date('Y-m-d') ?>" required />
                         </div> 
-                        <div class="mb-3 text-start">
-                            <label for="noktp">Jabatan Terakhir</label>
-                            <select class="form-select" aria-label="Default select example" name="jabatan" required>
-                                <?php foreach ($jobs as $job) { ?>
-                                        <option value="<?= $job[
-                                            'job_level'
-                                        ] ?>"><?= $job['job_level'] ?></option>
-                                    <?php } ?>
-                            </select>
-                        </div>
-                        <div class="mb-3 text-start">
-                            <label for="noktp">Department Terakhir</label>
-                            <select class="form-select" aria-label="Default select example" name="department" required>
-                                <?php foreach ($departments as $department) { ?>
-                                        <option value="<?= $department['department'] ?>"><?= $department['department'] ?></option>
-                                    <?php } ?>
-                            </select>
-                        </div>
+
                         <div class="mb-3 text-start">
                             <label for="noktp">Gedung</label>
                             <select class="form-select" aria-label="Default select example" name="gedung" required>
-                                <?php foreach ($buildings as $building) { ?>
-                                    <option value="<?= $building ?>"><?= $building ?></option>
+                                <?php 
+                                    $building = [                                        
+                                            "GEDUNG A", "GEDUNG B", "GEDUNG C", "GEDUNG D", "GEDUNG E", "GEDUNG F", "GEDUNG G", "GEDUNG H", "LAMINATING", "GUDANG SETTING", "WAREHOUSE (MATERIAL)", "SABLON", "EMBOSS", "TRAINING CENTER", "MAIN OFFICE", "EPTE (BEACUKAI)", "POS SECURITY", "KANTOR SERIKAT", "MESS / DRIVER"
+                                    ];
+                                ?>
+                                <?php foreach ($building as $build) { ?>
+                                    <option value="<?= $build ?>"><?= $build ?></option>
                                 <?php } ?>
                             </select>
                         </div>

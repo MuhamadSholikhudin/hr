@@ -31,16 +31,11 @@ class PageController extends Controller
 
     public function resign(){
 
-        $jobs = [["job_level" => "NONE" ]];
-        $departments = [["department" => "NONE"]];
         $buildings = ["NONE"];
 
         if(Curl($this->url_api) == "false"){
             return view('pages.resign',[
                 'base_url' => $this->url,       
-                'jobs' => $jobs,
-                'departments' => $departments,
-                'buildings' => $buildings
             ]);
         }
 
@@ -77,6 +72,8 @@ class PageController extends Controller
 
         $status_resign = "200";
         $date_resign = date('Y-m-d');
+        $job_level = "";
+        $department = "";
         $status = 400;
         $name = "";
         $informasi = "";
@@ -95,45 +92,40 @@ class PageController extends Controller
             // tampilkan data hire_date, date_out, status_employee
             $dateresign = json_decode(file_get_contents($this->url_api."/resigndate/".$request->number_of_employees."/".$request->national_id.""), true);
  
+            $date_out = $dateresign['employee']['date_out'];
+            if($date_out == "0000-00-00"){
+                $date_out = date("Y-m-d");
+            }
+            $status_resign = $dateresign['employee']['status_employee'];
+            $date_resign = $date_out;
+            $name = $dateresign['employee']['name'];
+            $job_level = $dateresign['employee']['job_level'];
+            $department = $dateresign['employee']['department'];
+
             switch ($dateresign['status']){
                 case 405: 
                     $status = 405;
-                    $status_resign = $dateresign['employee']['status_employee'];
-                    $date_resign = $dateresign['employee']['date_out'];
-                    $name = $dateresign['employee']['name'];
                     $informasi = $dateresign['information'];
                     break;
                 case 404: 
                     $status = 404;
-                    $status_resign = $dateresign['employee']['status_employee'];
-                    $date_resign = $dateresign['employee']['date_out'];
-                    $name = $dateresign['employee']['name'];
                     $informasi = $dateresign['information'];
                     break;
                 case 202:
                     $status = 202;
-                    $status_resign = $dateresign['employee']['status_employee'];
-                    $date_resign = date('Y-m-d');
-                    $name = $dateresign['employee']['name'];
                     $informasi = $dateresign['information'];
                     break;
                 case 200:
                     $status = 200;
-                    $status_resign = $dateresign['employee']['status_employee'];
-                    $date_resign = date('Y-m-d');
-                    $name = $dateresign['employee']['name'];
                     $informasi = $dateresign['information'];
                     break;
                 default:
                     $status = 400;
-                    $status_resign = $dateresign['employee']['status_employee'];
-                    $date_resign = $dateresign['employee']['date_out'];
-                    $name = $dateresign['name'];
                     $informasi = "";
             }
         }
              
-        $data = [$status, $status_resign, $date_resign, $name, $informasi];
+        $data = [$status, $status_resign, $date_resign, $name, $informasi, $job_level, $department];
         return json_encode($data);
     }
 
@@ -204,8 +196,6 @@ class PageController extends Controller
                     exit("0 tahun 0 bulan 0 hari");
                 }
                 $y = $today->diff($birthDate)->y;
-                $m = $today->diff($birthDate)->m;
-                $d = $today->diff($birthDate)->d;
                 return $y;
             }
             $age = Hitung_umur($date_of_birth);
@@ -242,9 +232,6 @@ class PageController extends Controller
                     exit("0 tahun 0 bulan 0 hari");
                 }
                 $y = $today->diff($birthDate)->y;
-                $m = $today->diff($birthDate)->m;
-                $d = $today->diff($birthDate)->d;
-                // return $y." tahun ".$m." bulan ".$d." hari";
                 return $y;
             }
             
@@ -278,8 +265,13 @@ class PageController extends Controller
                 'created_at' => $date_now,
                 'updated_at' => $date_now                
             ];
-
+            DB::table('resignation_submissions')->insert($dataresign);
+            $submission = DB::table('resignation_submissions')
+                ->where('number_of_employees', $request->nik)
+                ->where('updated_at', $date_now)
+            ->first();
             $datakuesioner = [
+                'resignation_submission_id' => $submission->id,
                 'number_of_employees' => $request->nik,
                 "k1" => $request->kuesioner1,
                 "k2" => $request->kuesioner2,
@@ -289,35 +281,11 @@ class PageController extends Controller
                 "k6" => $request->kuesioner6,
                 "k7" => $request->kuesioner7
             ];
-
-            $data = [
-                $dataresign,
-                $datakuesioner
-            ];
-
-            DB::table('resignation_submissions')->insert($dataresign);
             DB::table('kuesioners')->insert($datakuesioner);
         }
 
-        return redirect('/pages/resign'.$request->nik)->with('success', '<script>swal("Pengajuan Resign Karyawan Berhasil");</script>');
+        return redirect('/pages/resign')->with('success', '<script>swal("Pengajuan Resign Karyawan Berhasil Selanjutnya download form pengajuan anda pada form download pengajuan di bawah ini !!!");</script>');
     }
-
-    /*
-        public function Resignpdf($number_of_employees){
-            $resignation_submissions = DB::table('resignation_submissions')
-                ->where('number_of_employees', '=', $number_of_employees)
-                ->first();
-            $kuesioners = DB::table('kuesioners')
-                ->where('number_of_employees', '=', $number_of_employees)
-                ->first();
-            $data = [
-                'resignation_submission' => $resignation_submissions,
-                'kuesioner' =>  $kuesioners
-            ];
-            $pdf = PDF::loadView('pages.pdfresign');
-            return $pdf->download('Formulir_pengunduran_diri.pdf', $data);
-        }
-    */
 
     public function Resignpdf(Request $request){
         $count_submission = DB::table("resignation_submissions")

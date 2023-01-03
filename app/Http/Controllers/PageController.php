@@ -129,16 +129,6 @@ class PageController extends Controller
         return json_encode($data);
     }
 
-	/*
-	function CheckDateSubmission($date_submission = string, $date_request = string){
-		
-		
-		
-		return $typ;
-	}
-	*/
-
-
     public function Post(Request $request){
         $status_resign = "";
         $date_resign = date('Y-m-d');
@@ -187,9 +177,7 @@ class PageController extends Controller
             }
             $date_resignation_submissions = $request->dateresign;
 
-            
             $date_of_birth = $dateresign['employee']['date_of_birth'];
-
             //================
             $hire_date1 = strtotime($dateresign['employee']['hire_date']); 
             $date_resign2 = strtotime($date_resignation_submissions); 
@@ -212,11 +200,12 @@ class PageController extends Controller
             //================
 			$status_reignsubmisssion = "wait";
 			
-			$type = "true";
-            $classification = "Mengajukan permohonan resign sebelum karyawan resign";
-        }
-
-        else{ // jika status employee masih tidak active maka tanggal resign adalah tanggak dia sudah resign
+			$type = $this->CheckDateSubmission(date("Y-m-d"), $date_resignation_submissions);
+            $classification = "Mengajukan permohonan resign setelah karyawan resign";
+            if ($type == "true"){
+                $classification = "Mengajukan permohonan resign sebelum karyawan resign";
+            }
+        }else{ // jika status employee masih tidak active maka tanggal resign adalah tanggak dia sudah resign
             $status = 202;
             $name = $dateresign['employee']['name'];
             $status_resign = $dateresign['employee']['status_employee'];
@@ -294,7 +283,6 @@ class PageController extends Controller
             ];
             DB::table('kuesioners')->insert($datakuesioner);
         }
-
         return redirect('/pages/resign')->with('success', '<script>swal("Pengajuan Resign Karyawan Berhasil Selanjutnya download form pengajuan anda pada form download pengajuan di bawah ini !!!");</script>');
     }
 
@@ -302,41 +290,44 @@ class PageController extends Controller
         $count_submission = DB::table("resignation_submissions")
             ->where("number_of_employees", $request->number_of_employees)
         ->count();
-
         if($count_submission == 0){
             return redirect('/pages/resign')->with('faileddownload', '<script>swal("Download Pengajuan Resign Gagal Karena NIK '.$request->number_of_employees.'  Belum mengajukan resign pada form di bawah ini");</script>');
-        }
-           
+        }  
         $resignation_submissions = DB::table("resignation_submissions")
             ->where("number_of_employees", $request->number_of_employees)
             ->where("number_of_employees", $request->number_of_employees)
             ->latest()
         ->first();
-
         if($resignation_submissions->status_resignsubmisssion !== "wait"){
             return redirect('/pages/resign')->with('faileddownload', '<script>swal("Download Pengajuan Resign Gagal Karena Anda Belum mengajukan resign pada form di bawah ini");</script>');
         }
-
         $kuesioners = DB::table("kuesioners")
             ->where("number_of_employees", $request->number_of_employees)
             ->latest()
         ->first();
-
         //Alamat dan Tanggal Lahir
         $url = Curl($this->url_api);
         if($url !== "true"){ //jika koneksi api json gagal 
             return redirect('/pages/resign')->with('faileddownload', '<script>swal("Pengajuan Resign Gagal Karena Server Error");</script>');
         }
-
         $alamat = json_decode(file_get_contents($this->url_api."/resignalamat/".$request->number_of_employees), true);
-
         $pdf = PDF::loadView('pages.pdfresign', [ 
             'resignation_submissions' => $resignation_submissions,
             'kuesioners' => $kuesioners,
             'alamat' => $alamat
         ]);
-
         return $pdf->download('Formulir_pengunduran_diri_'.$request->number_of_employees.'.pdf');
+    }
+
+    function CheckDateSubmission($date_submission = string, $date_request = string){
+        $Date = $date_submission;
+        $date_check_request = date('Y-m-d', strtotime($Date. ' + 7 days'));
+        if ($date_check_request <= $date_request) {
+            $typ = "true";
+        }else{
+            $typ = "false";
+        }
+       return $typ;
     }
 
     public function example(){
@@ -537,8 +528,7 @@ class PageController extends Controller
         echo $output_alamat."</br>";
 
         echo strlen($output_alamat);
-        */
-
+        
         $data = json_decode(file_get_contents($this->url_api."/resignsubmissions"), true);
 
         echo $data["code"];
@@ -546,8 +536,11 @@ class PageController extends Controller
         echo "</br>";
 
         echo $data["meta"]["page"]["currentPage"];
+        */
 
+        echo $this->CheckDateSubmission("2023-01-03", "2023-01-12");
 
     }
+
 
 }

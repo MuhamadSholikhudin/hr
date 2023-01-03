@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulir Pengunduran Diri <?= $resignation_submissions->number_of_employees ?></title>
+    <title> <?= $resignation_submissions->number_of_employees ?> Formulir Pengunduran Diri </title>
     <style>
         
         body{
@@ -184,7 +184,7 @@
             </tr>
             <tr>
                  <td class="logotd" colspan="2" style="text-align: center; font-size:13px;">
-                    Sistim Manajemen 
+                    Sistem Manajemen 
                     Ketenagakerjaan
                 </td>
                  <td class="logotd alignleft" style="font-size:13px; padding-left:7px; padding-right:7px; padding-top:3px; padding-bottom:3px;">Halaman</td>
@@ -908,7 +908,7 @@
                 <tr>
                     <th class="logotd" rowspan="2" style="padding-left:5px; padding-right:5px;">NO</th>
                     <th class="logotd" rowspan="2" style="width:440px; padding-left:5px; padding-right:5px;">Pernyataan </th>
-                    <th class="logotd" colspan="4" style="padding-left:5px; padding-right:5px;" >DIKEMBALIKAN</th>
+                    <th class="logotd" colspan="4" style="padding-left:5px; padding-right:5px;" >Jawaban</th>
                 </tr>
                 <tr>
                     <th class="logotd" style="width:40px; padding-left:5px; padding-right:5px;">4 <br> (SS) </th>
@@ -939,7 +939,7 @@
 
                     <td style="border: 1px solid black;">
                         <?php 
-                            if($kuesioners->$k == 1){ ?>
+                            if($kuesioners->$k == 4){ ?>
                             <div style="padding:10; text-align:center;">
                                 <img src="{{ public_path('assets/img/checklist.png') }}" style="width:10px;" alt="" srcset="">
                             </div>
@@ -949,7 +949,7 @@
 
                     <td style="border: 1px solid black;">     
                         <?php 
-                            if($kuesioners->$k == 2){ ?>
+                            if($kuesioners->$k == 3){ ?>
                             <div style="padding:10; text-align:center;">
                                 <img src="{{ public_path('assets/img/checklist.png') }}" style="width:10px;" alt="" srcset="">
                             </div>
@@ -958,7 +958,7 @@
                     </td>
                     <td style="border: 1px solid black;">
                         <?php 
-                            if($kuesioners->$k == 3){ ?>
+                            if($kuesioners->$k == 2){ ?>
                             <div style="padding:10; text-align:center;">
                                 <img src="{{ public_path('assets/img/checklist.png') }}" style="width:10px;" alt="" srcset="">
                             </div>
@@ -967,7 +967,7 @@
                     </td>
                     <td style="border: 1px solid black;">
                         <?php 
-                            if($kuesioners->$k == 4){ ?>
+                            if($kuesioners->$k == 1){ ?>
                             <div style="padding:10; text-align:center;">
                                 <img src="{{ public_path('assets/img/checklist.png') }}" style="width:10px;" alt="" srcset="">
                             </div>

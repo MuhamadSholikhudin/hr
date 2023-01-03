@@ -129,6 +129,16 @@ class PageController extends Controller
         return json_encode($data);
     }
 
+	/*
+	function CheckDateSubmission($date_submission = string, $date_request = string){
+		
+		
+		
+		return $typ;
+	}
+	*/
+
+
     public function Post(Request $request){
         $status_resign = "";
         $date_resign = date('Y-m-d');
@@ -177,7 +187,7 @@ class PageController extends Controller
             }
             $date_resignation_submissions = $request->dateresign;
 
-            $type = "true";
+            
             $date_of_birth = $dateresign['employee']['date_of_birth'];
 
             //================
@@ -200,8 +210,9 @@ class PageController extends Controller
             }
             $age = Hitung_umur($date_of_birth);
             //================
-
-            $status_reignsubmisssion = "wait";
+			$status_reignsubmisssion = "wait";
+			
+			$type = "true";
             $classification = "Mengajukan permohonan resign sebelum karyawan resign";
         }
 

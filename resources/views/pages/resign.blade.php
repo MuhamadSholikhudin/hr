@@ -18,19 +18,19 @@
             <!-- Portfolio Grid Items-->
             <div class="row justify-content-center">
                 <div class="col-md-4">
-                    <h3 class="mt-4 text-center">Download Form Pengunduran Diri </h3>                   
+                    <h2 class="mt-4 text-center">DOWNLOAD <br> BERKAS 4 LEMBAR </h2>
                     <div class="card p-1">
                         <form action="/pages/resignpdf" method="POST">
                         @csrf
                         <div class="mb-3 text-start text-center mt-2" style="padding-left:10px; padding-right:10px;">
-                            <label for="nik" class="form-label">NIK (Nomor Induk Karyawan) / Nomor ID CARD</label>
+                            <label for="nik" class="form-label">Masukan NIK (Nomor Induk Karyawan) / Nomor ID CARD</label>
                             <input type="text" class="form-control" name="number_of_employees" id="number_of_employees" value="" placeholder="22050xxxxx" required>
                         </div>
                         <div class="mb-3 text-center" style="padding-left:10px; padding-right:10px;">
-                            <button class="btn btn-success" ><i class="fas fa-download"></i> Download Form Pengunduran diri</button> 
+                            <button class="btn btn-success" ><i class="fas fa-download"></i> Download</button> 
                         </div>
                         <a href="#formonline">
-                            <p style="text-align:center;">Jika belum mengajukan Silahkan isi form di bawah ini.</p>
+                            <p style="text-align:center;">Jika belum mengajukan,  silahkan isi form di bawah ini.</p>
                         </a>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
             <!-- Icon Divider-->
             <div class="divider-custom">
                 <div class="divider-custom-line"></div>
-                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-icon"><i class="fas fa-pencil"></i></div>
                 <div class="divider-custom-line"></div>
             </div>
             <!-- Portfolio Grid Items-->
@@ -55,15 +55,18 @@
                 <div class="col-md-12">
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
                         <!-- <strong>Holy guacamole!</strong> You should check in on some of those fields below. -->
-
-                        1. Peringatan Form Pelayanan Pengajuan Resign ini hanya di peruntukkan untuk karyawan HWI yang
-                        ingin berhenti bekerja dengan PT HWI <br>
-                        2. Jika anda mengajukan resign maka sistem akan memproses pengajuan resign anda. <br>
-                        3. Setelah anda mengajukan resign maka surat kerangan resign anda akan di layani satu bulan dari
-                        anda mengajukan resign <br>
-                        3. Jika anda ingin membatalkan pengajuan resign yang telah dikirim maka anda harus konfirmasi ke
-                        HRD sebelum Surat Keterangan resign anda si proses<br>
-
+						KETERANGAN : <br>
+                        1. Form Pelayanan Pengajuan Resign ini hanya di peruntukkan untuk karyawan PT.Hwaseung Indonesia <br>
+                        2. Jika anda mengajukan Resign maka sistem akan memproses pengajuan Resign anda. <br>
+						3. Jangan Lupa untuk Download Bukti Pengajuan Surat Keterangan Kerja setelah selesai mengisi Formulir ini <br>
+						4. Cetak Berkas dan ditanda tangani dibawa ketika pengambilan surat Paklaring <br>
+                        5. Surat Paklaring (Pengalaman Kerja) / Keterangan Kerja dapat diambil sesuai Tanggal Pengambilan Surat dari pengisian Formulir ini <br>
+						6. Untuk pengambilan hari Sabtu dan Minggu / tanggal merah Libur, dapat diambil hari berikutnya <br>
+						NOTE : <br>
+                        - Jika anda ingin membatalkan pengajuan resign yang telah dikirim maka anda harus konfirmasi ke
+                        HRD sebelum Surat Keterangan resign anda si proses <br>
+						- Untuk karyawan Resign secara prosedur dapat mengambil Surat Paklaring (Pengalaman Kerja) / Keterangan Kerja dihari terakhir bekerja. <br>
+						- Pelayanan Pengambilan Surat Paklaring jam 09.00 - 10.30 WIB
                         <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
@@ -180,23 +183,17 @@
                         <table class="mb-3">
                             <tr >
                                 <td></td>
-                                <td>&nbsp;&nbsp;1</td>
-                                <td>&nbsp;&nbsp;2</td>
-                                <td>&nbsp;&nbsp;3</td>
                                 <td>&nbsp;&nbsp;4</td>
+                                <td>&nbsp;&nbsp;3</td>
+                                <td>&nbsp;&nbsp;2</td>
+                                <td>&nbsp;&nbsp;1</td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>&nbsp;&nbsp;&nbsp;&nbsp;Sangat Tidak Sesuai</td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;Sangat Sesuai</td>
                                 <td>
                                     <label class="containerkuesioner">
-                                        <input type="radio" name="kuesioner<?= $key ?>" value="1" required="required">
-                                        <span class="checkmarkkuesioner"></span>
-                                    </label>
-                                </td>
-                                <td>
-                                    <label class="containerkuesioner">
-                                        <input type="radio" name="kuesioner<?= $key ?>" value="2" required="required">
+                                        <input type="radio" name="kuesioner<?= $key ?>" value="4" required="required">
                                         <span class="checkmarkkuesioner"></span>
                                     </label>
                                 </td>
@@ -208,18 +205,24 @@
                                 </td>
                                 <td>
                                     <label class="containerkuesioner">
-                                        <input type="radio" name="kuesioner<?= $key ?>" value="4" required="required">
+                                        <input type="radio" name="kuesioner<?= $key ?>" value="2" required="required">
                                         <span class="checkmarkkuesioner"></span>
                                     </label>
                                 </td>
-                                <td>Sangat sesuai</td>
+                                <td>
+                                    <label class="containerkuesioner">
+                                        <input type="radio" name="kuesioner<?= $key ?>" value="1" required="required">
+                                        <span class="checkmarkkuesioner"></span>
+                                    </label>
+                                </td>
+                                <td>Sangat Tidak Sesuai</td>
                             </tr>
                         </table>
                     </div>
                     <?php }
                     ?>
                 </div>
-                <button class="btn btn-primary mt-4" type="submit" >AJUKAN PROSES RESIGN</button>
+                <button class="btn btn-primary mt-4" type="submit" >AJUKAN RESIGN</button>
                 </form>
 
                 <div class="col-md-12 mt-3">

@@ -14,6 +14,7 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         //
 		'/pages/resignpdf',
+		'/pages/resign',
 		'/pages/apigetemployee',
 		'/pages/apigetresign'
     ];
